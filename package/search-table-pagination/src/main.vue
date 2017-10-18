@@ -36,7 +36,7 @@
       border stripe
       style="width: 100%;margin-top:20px;">
 
-      <slot name="pre-column" />
+      <slot name="prepend" />
 
       <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
         :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
@@ -54,7 +54,7 @@
         </template>
       </el-table-column>
 
-      <slot name="operate-column" />
+      <slot name="append" />
 
     </el-table>
 
@@ -268,7 +268,7 @@
 
           this.loading = false
         }).catch(error => {
-          console.error(error)
+          console.error('Get remote data failed. ', error)
           this.loading = false
         })
       }
