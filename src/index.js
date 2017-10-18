@@ -7,10 +7,14 @@ const components = [
   SearchTablePagination
 ];
 
-const install = function(Vue) {
+const install = function(Vue, opts = {}) {
   components.map(component => {
     Vue.component(component.name, component);
   });
+  if (!opts.axios) {
+    opts.axios = require('axios')
+  }
+  Vue.prototype.axios = opts.axios
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

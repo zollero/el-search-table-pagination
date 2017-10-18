@@ -1,6 +1,6 @@
 {
   "name": "el-search-table-pagination",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A component which combines form、table with pagination components in Element UI. ",
   "main": "./src/index.js",
   "scripts": {
@@ -24,7 +24,9 @@
     "url": "https://github.com/zollero/el-search-table-pagination/issues"
   },
   "homepage": "https://github.com/zollero/el-search-table-pagination#readme",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.16.2"
+  },
   "devDependencies": {
     "element-ui": "^1.4.7",
     "vue": "^2.5.2"

@@ -58,7 +58,7 @@
 
     </el-table>
 
-    <div v-if="showPagination && total > pagination.pageSize"
+    <div v-if="showPagination"
       style="margin-top: 10px;text-align: right;">
       <el-pagination
         @size-change="handleSizeChange"
@@ -75,19 +75,39 @@
 
 <script>
   import Vue from 'vue'
-  import tableComponent from '../../table'
-  import paginationComponent from '../../pagination'
 
   export default {
     name: 'ElSearchTablePagination',
-    components: {
-      tableComponent,
-      paginationComponent
-    },
     props: {
-      fetch: {
-        type: Function,
-        required: true
+      url: {
+        type: String,
+        default: ''
+      },
+      method: {
+        type: String,
+        default: 'get',
+        validator: value => {
+          const methodTypes = ['get', 'post', 'put', 'delete', 'head', 'options', 'patch'];
+          return methodTypes.indexOf(value.toLowerCase()) !== -1;
+        }
+      },
+      headers: {
+        type: Object,
+        default: () => {
+          return {}
+        }
+      },
+      // fetch: {
+      //   type: Function,
+      //   required: true
+      // },
+      listField: {
+        type: String,
+        default: 'data.list'
+      },
+      totalField: {
+        type: String,
+        default: 'data.total'
       },
       params: {
         type: Object,
@@ -132,7 +152,7 @@
     },
     data() {
       return {
-        Vue: Vue,
+        Vue,
         pagination: {
           pageIndex: 1,
           pageSize: 20
@@ -162,18 +182,62 @@
           params = Object.assign(this.params, this.pagination)
         }
 
-        this.fetch(params).then(response => {
-          const { code, data, message } = response
-          if (code === '00000') {
-            if (this.dataHandler) {
-              this.tableData = data.list.map(this.dataHandler)
-            } else {
-              this.tableData = data.list
-            }
-            this.total = data.total
-          } else {
-            this.$message.error(message)
+        let { method, url, $axios, headers, listField, totalField } = this
+        let requestObject = null
+
+        $axios.interceptors.request.use(
+          config => {
+            Object.keys(headers).forEach(v => {
+              config.headers[v] = headers[v]
+            })
+            return config;
+          },
+          error => {
+            return Promise.reject(error);
           }
+        )
+
+        method = method.toLowerCase();
+
+        if (method === 'get') {
+          requestObject = $axios[method](url, { params })
+        } else {
+          requestObject = $axios[method](url, params)
+        }
+
+        requestObject.then(response => {
+          let result = response
+          if (listField.indexOf('.') !== -1) {
+            listField.split('.').forEach(vv => {
+              result = result[vv]
+            })
+          } else {
+            result = response[listField]
+          }
+
+          if (!result || !(result instanceof Array)) {
+            throw new Error(`The result of key:${listField} is not Array. 接口返回的字段:${listField} 不是一个数组`)
+            this.loading = false
+            return false
+          }
+
+          if (this.dataHandler) {
+            this.tableData = result.map(this.dataHandler)
+          } else {
+            this.tableData = result
+          }
+
+          let totalValue = response
+          if (totalField.indexOf('.') !== -1) {
+            totalField.split('.').forEach(vv => {
+              totalValue = totalValue[vv]
+            })
+          } else {
+            totalValue = response[totalField]
+          }
+
+          this.total = totalValue
+
           this.loading = false
         }).catch(error => {
           console.error(error)
