@@ -31,12 +31,7 @@
 
     <slot name="search-form" :loading="loading" :search="searchHandler" />
 
-    <table-component
-      :table-data="tableData"
-      :columns="columns"
-      :loading="loading" />
-
-    <!-- <el-table v-loading.lock="loading"
+    <el-table v-loading.lock="loading"
       :data="tableData"
       border stripe
       style="width: 100%;margin-top:20px;">
@@ -61,15 +56,10 @@
 
       <slot name="operate-column" />
 
-    </el-table> -->
+    </el-table>
 
-    <pagination-component
-      :show-pagination="showPagination"
-      :page-index="pagination.pageIndex"
-      :page-size="pagination.pageSize"
-      :total="total" />
-
-    <!-- <div v-if="showPagination && total > pagination.pageSize" style="margin-top: 10px;text-align: right;">
+    <div v-if="showPagination && total > pagination.pageSize"
+      style="margin-top: 10px;text-align: right;">
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
@@ -78,7 +68,7 @@
         :page-size="pagination.pageSize"
         layout="total, prev, pager, next, jumper, sizes"
         :total="total">
-      </el-pagination> -->
+      </el-pagination>
     </div>
   </div>
 </template>
