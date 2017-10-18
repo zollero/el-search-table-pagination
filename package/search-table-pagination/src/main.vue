@@ -64,9 +64,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="pagination.pageIndex"
-        :page-sizes="[20, 50, 100]"
+        :page-sizes="pageSizes"
         :page-size="pagination.pageSize"
-        layout="total, prev, pager, next, jumper, sizes"
+        :layout="paginationLayout"
         :total="total">
       </el-pagination>
     </div>
@@ -75,6 +75,8 @@
 
 <script>
   import Vue from 'vue'
+
+  const _this = this
 
   export default {
     name: 'ElSearchTablePagination',
@@ -97,10 +99,6 @@
           return {}
         }
       },
-      // fetch: {
-      //   type: Function,
-      //   required: true
-      // },
       listField: {
         type: String,
         default: 'data.list'
@@ -148,6 +146,24 @@
       showPagination: {
         type: Boolean,
         default: true
+      },
+      pageSizes: {
+        type: Array,
+        default: () => {
+          return [20, 50, 100]
+        }
+      },
+      paginationLayout: {
+        type: String,
+        default: 'total, prev, pager, next, jumper, sizes'
+      },
+      pageIndexKey: {
+        type: String,
+        default: 'pageIndex'
+      },
+      pageSizeKey: {
+        type: String,
+        default: 'pageSize'
       }
     },
     data() {
@@ -155,7 +171,13 @@
         Vue,
         pagination: {
           pageIndex: 1,
-          pageSize: 20
+          pageSize: (() => {
+            const { pageSizes } = _this.default.props;
+            if (pageSizes.length > 0) {
+              return pageSizes[0]
+            }
+            return 20
+          })()
         },
         total: 0,
         loading: false,
@@ -177,12 +199,18 @@
       },
       fetchHandler() {
         this.loading = true
-        let params = JSON.parse(JSON.stringify(this.params))
-        if (this.showPagination) {
-          params = Object.assign(this.params, this.pagination)
+        let { method, url, $axios, headers, listField, pageIndexKey, pageSizeKey,
+              totalField, params, showPagination, pagination } = this
+
+        params = JSON.parse(JSON.stringify(params))
+
+        if (showPagination) {
+          params = Object.assign(params, {
+            [pageIndexKey]: pagination.pageIndex,
+            [pageSizeKey]: pagination.pageSize
+          })
         }
 
-        let { method, url, $axios, headers, listField, totalField } = this
         let requestObject = null
 
         $axios.interceptors.request.use(
