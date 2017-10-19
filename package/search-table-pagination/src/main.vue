@@ -82,14 +82,13 @@
     name: 'ElSearchTablePagination',
     props: {
       url: {
-        type: String,
-        default: ''
+        type: String
       },
       method: {
         type: String,
         default: 'get',
         validator: value => {
-          const methodTypes = ['get', 'post', 'put', 'delete', 'head', 'options', 'patch'];
+          const methodTypes = ['get', 'post', 'put', 'delete'];
           return methodTypes.indexOf(value.toLowerCase()) !== -1;
         }
       },
