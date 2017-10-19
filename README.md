@@ -103,6 +103,7 @@ And the Test page is the image below:
 ### Attributes
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- |------|:----:|-----|:-----:|
 | url | 后端数据接口 | string | - | - |
 | method| 接口请求方式 | string | get, post, delete, put | get |
 | headers | 请求头信息 | object | - | - |
@@ -129,11 +130,13 @@ And the Test page is the image below:
 ### Methods
 
 | 方法名 | 说明 | 参数 |
+| ----- |-----|-----|
 | searchHandler | 重置分页页码参数为1，重新搜索数据 | - |
 
 ### Slots
 
 | name | 说明 |
+| ---- |-----|
 | search-form | table 上部展示一个搜索区域，该`slot`下通过`scope`可以访问到两个属性：loading（查询中的loading状态值），search（搜索方法）|
 | prepend | table中，在最左边添加的列 |
 | append | table中，在最右边添加的列，一般可放置`操作列` |
