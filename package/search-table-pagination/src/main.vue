@@ -14,7 +14,7 @@
       <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
         :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
         :minWidth="column.minWidth || column.width || 140" >
-        <template scope="scope">
+        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
           </span>
@@ -154,6 +154,11 @@
         total: 0,
         loading: false,
         tableData: []
+      }
+    },
+    computed: {
+      newSlotScope() {
+        return Number(Vue.version.replace('.', '')) > 250
       }
     },
     methods: {
