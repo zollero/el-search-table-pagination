@@ -1,31 +1,4 @@
 
-
-<!--
-  这是一个包含 搜索条件，table数据展示 和 分页空间 的组件
-
-  属性API:
-  fetch: 函数(如：api.getList)，获取数据的接口函数，必填
-  params: form表达的参数对象，非必填
-  dataHandler: 对列表数据进行处理的array.map回调函数，接收的参数是列表的每个元素，是需要在函数内将处理的结构返回出来
-  columns: {  table列属性，必填
-    prop: 映射数据的属性名
-    label: 列名
-    width: 宽度
-    minWidth: 最小宽度
-    filter: 使用的过滤器
-    render: 函数，如果需要处理数据不需要复杂标签，在该函数中返回需要展示的数据。如：render: row => row.a + 2
-    slotName: 使用一个template来渲染代码片段，代码段的slot值（该slot需要在本组件内部设置）
-  }
-
-  showPagination: 是否显示分页控件，默认true
-
-  slot属性：
-  search-form: 搜索框区域（该slot必须使用template包裹，且可通过属性调用search方法来启动搜索）
-  pre-column: 最左边的列（比如：复选框列，索引页）
-  operate-column: table操作列
-
- -->
-
 <template>
   <div>
 
