@@ -30,7 +30,7 @@ Vue.use(ElSearchTablePagination, {
 
 Use this component in a page:
 
-```
+```vue
 <template>
   <div>
     <el-search-table-pagination
@@ -38,7 +38,8 @@ Use this component in a page:
       :params="searchParams"
       :columns="columns">
             
-      <!-- If you are using Vue v2.5 or higher version, please replace `scope="scope"` to `slot-scope="scope"` -->
+      <!-- If you are using Vue v2.5 or higher version, 
+           please replace `scope="scope"` to `slot-scope="scope"` -->
       <template slot="search-form" scope="scope">
         <el-form :inline="true" :model="searchParams">
           <el-form-item label="Name" prop="name">
