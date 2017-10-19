@@ -95,9 +95,7 @@ Use this component in a page:
 ```
 
 
-And the Test page is the image below:
-
-![Screen shot](./screenshot/el-search-table-pagination.png)
+And the Test page is the image above.
 
 ## API
 
