@@ -2,7 +2,7 @@
 <template>
   <div>
 
-    <slot name="search-form" :loading="loading" :search="searchHandler" />
+    <slot name="form" :loading="loading" :search="searchHandler" />
 
     <el-table v-loading.lock="loading"
       :data="tableData"
@@ -13,7 +13,8 @@
 
       <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
         :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
-        :minWidth="column.minWidth || column.width || 140" >
+        :minWidth="column.minWidth || column.width || 140"
+        :align="column.align">
         <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
@@ -49,8 +50,6 @@
 <script>
   import Vue from 'vue'
 
-  const _this = this
-
   export default {
     name: 'ElSearchTablePagination',
     props: {
@@ -85,6 +84,25 @@
           return {}
         }
       },
+      autoLoad: {
+        type: Boolean,
+        default: true
+      },
+      type: {
+        type: String,
+        default: 'remote',
+        validator(value) {
+          const types = ['remote', 'local']
+          const validType = types.indexOf(value) !== -1
+          if (!validType) {
+            throw new Error(`Invalid type of '${value}', please set one type of 'remote' or 'local'.`)
+          }
+          return validType
+        }
+      },
+      data: {
+        type: Array
+      },
       dataHandler: {
         type: Function
       },
@@ -104,6 +122,18 @@
         },
         minWidth: {
           type: Number
+        },
+        align: {
+          type: String,
+          default: 'left',
+          validator(value) {
+            const alignTypes = ['left', 'center', 'right']
+            const isValid = alignTypes.indexOf(value) === -1
+            if (isValid) {
+              throw new Error(`The value for 'align' is invalid, you can choose on in ['left', 'center', 'right']`)
+            }
+            return isValid
+          }
         },
         filter: {
           type: String
@@ -139,12 +169,13 @@
       }
     },
     data() {
+      const _this = this
       return {
         Vue,
         pagination: {
           pageIndex: 1,
           pageSize: (() => {
-            const { pageSizes } = _this.default.props;
+            const { pageSizes } = _this
             if (pageSizes.length > 0) {
               return pageSizes[0]
             }
@@ -153,7 +184,8 @@
         },
         total: 0,
         loading: false,
-        tableData: []
+        tableData: [],
+        cacheLocalData: []
       }
     },
     computed: {
@@ -164,15 +196,57 @@
     methods: {
       handleSizeChange(size) {
         this.pagination.pageSize = size
-        this.fetchHandler()
+        this.dataChangeHandler()
       },
       handleCurrentChange(pageIndex) {
         this.pagination.pageIndex = pageIndex
-        this.fetchHandler()
+        this.dataChangeHandler()
       },
       searchHandler() {
         this.pagination.pageIndex = 1
-        this.fetchHandler()
+        this.dataChangeHandler()
+      },
+      dataChangeHandler() {
+        const { type } = this
+        if (type === 'local') {
+          this.dataFilterHandler()
+        } else if (type === 'remote') {
+          this.fetchHandler()
+        }
+      },
+      dataFilter(data) {
+        const { pageIndex, pageSize } = this.pagination
+        return data.filter((v, i) => {
+          return i >= (pageIndex - 1) * pageSize && i < pageIndex * pageSize
+        })
+      },
+      dataFilterHandler() {
+        const { cacheLocalData, params, pagination } = this
+        const { pageIndex, pageSize } = pagination
+        const validParamKeys = Object.keys(params).filter(v => {
+          return params[v] !== undefined && params[v].trim() !== ''
+        })
+        if (validParamKeys.length > 0) {
+          const validData = cacheLocalData.filter(v => {
+            let valids = []
+            validParamKeys.forEach(vv => {
+              if (typeof v[vv] === 'number') {
+                valids.push(String(v[vv]) === params[vv])
+              } else {
+                valids.push(v[vv] === params[vv])
+              }
+            })
+            return valids.every(vvv => {
+              return vvv
+            })
+          })
+
+          this.tableData = this.dataFilter(validData)
+          this.total = validData.length
+        } else {
+          this.total = cacheLocalData.length
+          this.tableData = this.dataFilter(cacheLocalData)
+        }
       },
       fetchHandler() {
         this.loading = true
@@ -251,7 +325,20 @@
       }
     },
     created() {
-      this.fetchHandler()
+      const { type, autoLoad, data } = this
+      if (type === 'remote' && autoLoad) {
+        this.fetchHandler()
+      } else if (type === 'local') {
+        if (!data) {
+          throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
+          this.showPagination = false
+          return false
+        }
+        const cacheData = JSON.parse(JSON.stringify(data))
+        this.tableData = this.dataFilter(cacheData)
+        this.cacheLocalData = cacheData
+        this.total = cacheData.length
+      }
     }
   }
 </script>
