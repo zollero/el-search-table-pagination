@@ -53,6 +53,9 @@
   export default {
     name: 'ElSearchTablePagination',
     props: {
+      fetch: {
+        type: Function
+      },
       url: {
         type: String
       },
@@ -250,8 +253,10 @@
       },
       fetchHandler() {
         this.loading = true
-        let { method, url, $axios, headers, listField, pageIndexKey, pageSizeKey,
-              totalField, params, showPagination, pagination } = this
+        let { fetch, method, url, $axios, headers,
+              listField, pageIndexKey, pageSizeKey,
+              totalField, params, showPagination,
+              pagination } = this
 
         params = JSON.parse(JSON.stringify(params))
 
@@ -264,24 +269,28 @@
 
         let requestObject = null
 
-        $axios.interceptors.request.use(
-          config => {
-            Object.keys(headers).forEach(v => {
-              config.headers[v] = headers[v]
-            })
-            return config;
-          },
-          error => {
-            return Promise.reject(error);
-          }
-        )
-
-        method = method.toLowerCase();
-
-        if (method === 'get') {
-          requestObject = $axios[method](url, { params })
+        if (fetch) {
+          requestObject = fetch(params)
         } else {
-          requestObject = $axios[method](url, params)
+          $axios.interceptors.request.use(
+            config => {
+              Object.keys(headers).forEach(v => {
+                config.headers[v] = headers[v]
+              })
+              return config;
+            },
+            error => {
+              return Promise.reject(error);
+            }
+          )
+
+          method = method.toLowerCase();
+
+          if (method === 'get') {
+            requestObject = $axios[method](url, { params })
+          } else {
+            requestObject = $axios[method](url, params)
+          }
         }
 
         requestObject.then(response => {

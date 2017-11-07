@@ -4,6 +4,7 @@
 
 | Attribute | Description | Type | Accepted Values | Default |
 | --- |------|:----:|-----|:-----:|
+| fetch | A function to get remote data, it will get a object of search params as arguments, and return a promise. If it `fetch` is provided, will not get remote data from `url`. | function | - | - |
 | type | Data source type. It has two types of 'remote' and 'local'. | string | remote, local | remote |
 | data | Data list, only avaliable when type is 'local' | array | - | - |
 | url | Request URL | string | - | - |
