@@ -7,7 +7,9 @@
     <el-table v-loading.lock="loading"
       :data="tableData" border stripe
       :row-class-name="rowClassName"
-      style="width: 100%;margin-top:20px;">
+      style="width: 100%;margin-top:20px;"
+      @select="selectHandler" @select-all="selectAllHandler"
+      @selection-change="selectionChangeHandler">
 
       <slot name="prepend" />
 
@@ -339,6 +341,15 @@
           console.error('Get remote data failed. ', error)
           this.loading = false
         })
+      },
+      selectHandler() {
+        this.$emit('select', arguments)
+      },
+      selectAllHandler() {
+        this.$emit('select-all', arguments)
+      },
+      selectionChangeHandler() {
+        this.$emit('selection-change', arguments)
       }
     },
     created() {

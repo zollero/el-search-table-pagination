@@ -35,3 +35,11 @@
 | form | table 上部展示一个搜索区域，该`slot`下通过`scope`可以访问到两个属性：loading（查询中的loading状态值），search（搜索方法）|
 | prepend | table中，在最左边添加的列 |
 | append | table中，在最右边添加的列，一般可放置`操作列` |
+
+## Events
+
+| 事件名 | 说明 | 参数 |
+| ---- |-----| ----- |
+| select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection, row |
+| select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
+| selection-change | 当选择项发生变化时会触发该事件 | selection |

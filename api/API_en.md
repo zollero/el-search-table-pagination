@@ -35,3 +35,12 @@
 | form | A form above table component to contain parameters.  this `slot`'s `scope` has two properties: <br/> loading: request loading of Element Loading directive; search: research function |
 | prepend | This slot will be appended as the far lest column of the table |
 | append | This slot will be appended as the far right column of the table |
+
+## Events
+
+| Event Name | Description | Parameters |
+| ---- |-----| ----- |
+| select | triggers when user clicks the checkbox in a row | selection, row |
+| select-all | triggers when user clicks the checkbox in table header | selection |
+| selection-change | triggers when selection changes | selection |
+
