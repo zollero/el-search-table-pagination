@@ -15,7 +15,7 @@
 | total-field | 接口返回值对应数据总数的字段值 | string | - | data.total |
 | params | 搜索参数 | object | - | - |
 | data-handler | 数组数据的 map 处理函数 | function | - | - |
-| columns | table 列配置对象。<br/>包含的属性有： <br/>prop: 展示字段的字段值。string。<br/>label: 列名。string。<br/>width: 列宽，默认 140。number。<br/>minWidth: 最小列宽。number。<br/>filter: 过滤器名（只有配置在全局的filter才有效）。string。<br/>render: 处理数据的函数，接收行数据作为参数。function。<br/>slotName：使用 slot 标记的代码块的 slot 属性值。string。| array | - | - |
+| columns | table 列配置对象。<br/>包含的属性有： <br/>prop: 展示字段的字段值。string。<br/>label: 列名。string。<br/>width: 列宽，默认 140。number。<br/>minWidth: 最小列宽。number。<br/>filter: 过滤器名（只有配置在全局的filter才有效）。string。<br/>render: 处理数据的函数，接收行数据作为参数。function。<br/>slotName：使用 slot 标记的代码块的 slot 属性值。<br/>string。className：列的 className | array | - | - |
 | show-pagination | 是否显示分页组件，如设为false，查询时不传分页参数 | boolean | true, false | true |
 | page-sizes | 每页显示个数的控件选项 | array | - | [20, 50, 100] |
 | pagination-layout | 分页控件的结构，每个类型用逗号分隔 | string | sizes, prev, pager, next, jumper, ->, total, slot | total, prev, pager, next, jumper, sizes |

@@ -5,8 +5,8 @@
     <slot name="form" :loading="loading" :search="searchHandler" />
 
     <el-table v-loading.lock="loading"
-      :data="tableData"
-      border stripe
+      :data="tableData" border stripe
+      :row-class-name="rowClassName"
       style="width: 100%;margin-top:20px;">
 
       <slot name="prepend" />
@@ -14,7 +14,7 @@
       <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
         :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
         :minWidth="column.minWidth || column.width || 140"
-        :align="column.align">
+        :align="column.align" :class-name="column.className">
         <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
@@ -72,6 +72,10 @@
         default: () => {
           return {}
         }
+      },
+      rowClassName: {
+        type: String,
+        default: ''
       },
       listField: {
         type: String,
@@ -146,6 +150,10 @@
         },
         slotName: {
           type: String
+        },
+        className: {
+          type: String,
+          default: ''
         }
       },
       showPagination: {
@@ -173,6 +181,7 @@
     },
     data() {
       const _this = this
+      console.log(_this.$props)
       return {
         Vue,
         pagination: {
