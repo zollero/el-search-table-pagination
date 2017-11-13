@@ -181,7 +181,6 @@
     },
     data() {
       const _this = this
-      console.log(_this.$props)
       return {
         Vue,
         pagination: {
