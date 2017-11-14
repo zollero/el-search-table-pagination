@@ -350,13 +350,8 @@
       },
       selectionChangeHandler() {
         this.$emit('selection-change', arguments)
-      }
-    },
-    created() {
-      const { type, autoLoad, data } = this
-      if (type === 'remote' && autoLoad) {
-        this.fetchHandler()
-      } else if (type === 'local') {
+      },
+      loadLocalData(data) {
         if (!data) {
           throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
           this.showPagination = false
@@ -366,6 +361,19 @@
         this.tableData = this.dataFilter(cacheData)
         this.cacheLocalData = cacheData
         this.total = cacheData.length
+      }
+    },
+    created() {
+      const { type, autoLoad, data } = this
+      if (type === 'remote' && autoLoad) {
+        this.fetchHandler()
+      } else if (type === 'local') {
+        this.loadLocalData(data)
+      }
+    },
+    watch: {
+      data: function(value) {
+        this.loadLocalData(value)
       }
     }
   }
