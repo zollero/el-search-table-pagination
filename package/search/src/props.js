@@ -75,7 +75,8 @@ export const formProps = {
       default: () => {
         return {}
       }
-    }
+    },
+    pickerOptions: Object
   }
 }
 

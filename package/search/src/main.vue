@@ -5,7 +5,7 @@
     <el-form-item v-for="(form, index) in forms" :key="index"
       :prop="form.itemType != 'daterange' ? form.prop : (datePrefix + index)"
       :label="form.label">
-      <el-input v-if="form.itemType === 'input'"
+      <el-input v-if="form.itemType === 'input' || form.itemType === undefined"
         v-model="params[form.modelValue]"
         :size="form.size ? form.size : size"
         :readonly="form.readonly"
@@ -32,7 +32,8 @@
         :disabled="form.disabled"
         :readonly="form.readonly"
         :editable="form.editable"
-        :style="itemStyle" />
+        :style="itemStyle"
+        :picker-options="form.pickerOptions || {}" />
       <el-date-picker v-else-if="form.itemType === 'daterange'"
         v-model="params[form.modelValue]"
         :size="form.size ? form.size : size"
@@ -41,7 +42,8 @@
         :readonly="form.readonly"
         :editable="form.editable"
         :placeholder="form.placeholder"
-        :style="itemStyle" />
+        :style="itemStyle"
+        :picker-options="form.pickerOptions || {}" />
     </el-form-item>
     <el-form-item label="">
       <el-button
