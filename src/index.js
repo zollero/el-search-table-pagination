@@ -1,10 +1,12 @@
 
 import SearchTablePagination from '../package/search-table-pagination/index.js'
+import SearchForm from '../package/search/index.js'
 
 import packageInfo from '../package.json'
 
 const components = [
-  SearchTablePagination
+  SearchTablePagination,
+  SearchForm
 ];
 
 const install = function(Vue, opts = {}) {
@@ -24,5 +26,6 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   version: packageInfo.version,
   install,
-  SearchTablePagination
+  SearchTablePagination,
+  SearchForm
 }
