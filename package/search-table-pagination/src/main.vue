@@ -2,7 +2,20 @@
 <template>
   <div>
 
+    <search-form
+      v-if="formOptions"
+      ref="searchForm"
+      :forms="formOptions.forms"
+      :size="formOptions.size"
+      :inline="formOptions.inline"
+      :label-width="formOptions.labelWidth"
+      :item-width="formOptions.itemWidth"
+      :submit-handler="searchHandler"
+      :submit-loading="loading" />
+
     <slot name="form" :loading="loading" :search="searchHandler" />
+
+    <slot />
 
     <el-table v-loading.lock="loading"
       :data="tableData" border stripe
@@ -51,9 +64,14 @@
 
 <script>
   import Vue from 'vue'
+  import { formProps } from '../../search/src/props'
+  import searchForm from '../../search/src/main.vue'
 
   export default {
     name: 'ElSearchTablePagination',
+    components: {
+      searchForm
+    },
     props: {
       fetch: {
         type: Function
@@ -92,6 +110,10 @@
         default: () => {
           return {}
         }
+      },
+      formOptions: {
+        type: Object,
+        ...formProps
       },
       autoLoad: {
         type: Boolean,
@@ -217,14 +239,14 @@
       },
       searchHandler() {
         this.pagination.pageIndex = 1
-        this.dataChangeHandler()
+        this.dataChangeHandler(arguments[0])
       },
       dataChangeHandler() {
         const { type } = this
         if (type === 'local') {
-          this.dataFilterHandler()
+          this.dataFilterHandler(arguments[0])
         } else if (type === 'remote') {
-          this.fetchHandler()
+          this.fetchHandler(arguments[0])
         }
       },
       dataFilter(data) {
@@ -261,14 +283,14 @@
           this.tableData = this.dataFilter(cacheLocalData)
         }
       },
-      fetchHandler() {
+      fetchHandler(formParams = {}) {
         this.loading = true
         let { fetch, method, url, $axios, headers,
               listField, pageIndexKey, pageSizeKey,
               totalField, params, showPagination,
               pagination } = this
 
-        params = JSON.parse(JSON.stringify(params))
+        params = JSON.parse(JSON.stringify(Object.assign(params, formParams)))
 
         if (showPagination) {
           params = Object.assign(params, {
@@ -363,10 +385,14 @@
         this.total = cacheData.length
       }
     },
-    created() {
-      const { type, autoLoad, data } = this
+    mounted() {
+      const { type, autoLoad, data, formOptions } = this
       if (type === 'remote' && autoLoad) {
-        this.fetchHandler()
+        let params = {}
+        if (formOptions) {
+          params = this.$refs['searchForm'].getParams()
+        }
+        this.fetchHandler(params)
       } else if (type === 'local') {
         this.loadLocalData(data)
       }

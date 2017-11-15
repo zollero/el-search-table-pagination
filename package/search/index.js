@@ -1,8 +1,8 @@
 
-import ElSearchForm from './src/main'
+import SearchForm from './src/main'
 
-ElSearchForm.install = function(Vue) {
-  Vue.component(ElSearchForm.name, ElSearchForm)
+SearchForm.install = function(Vue) {
+  Vue.component(SearchForm.name, SearchForm)
 };
 
-export default ElSearchForm
+export default SearchForm
