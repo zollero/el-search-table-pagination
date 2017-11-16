@@ -130,8 +130,7 @@
     },
     methods: {
       isArray(value) {
-        const propType = typeof value
-        return propType === 'object' && Object.prototype.toString.call(v.prop) === '[object Array]'
+        return typeof value === 'object' && Object.prototype.toString.call(value) === '[object Array]'
       },
       searchHandler() {
         const { submitHandler } = this
