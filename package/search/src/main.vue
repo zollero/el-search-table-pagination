@@ -153,7 +153,7 @@
         let formattedForm = {}
         Object.keys(params).forEach(v => {
           if (v.indexOf(datePrefix) === -1) {
-            formattedForm[v] = format[v] ? format[v](params[v]) : params[v]
+            formattedForm[v] = format[v] ? format[v](params[v], v) : params[v]
           }
         })
         return formattedForm
