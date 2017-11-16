@@ -70,6 +70,7 @@ export const formProps = {
     selectMethod: String,
     valueKey: String,
     labelKey: String,
+    format: Function,
     selectParams: {
       type: Object,
       default: () => {

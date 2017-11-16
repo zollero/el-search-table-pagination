@@ -78,15 +78,22 @@
       }
 
       let params = {}
+      let format = {}
 
       forms.forEach((v, i) => {
         const propType = typeof v.prop
         if (propType === 'string') {
           v.modelValue = v.prop
           params[v.prop] = ''
+          if (v.format) {
+            format[v.prop] = v.format
+          }
         } else if (propType === 'object' && Object.prototype.toString.call(v.prop) === '[object Array]') {
           v.prop.forEach(vv => {
             params[vv] = ''
+            if (v.format) {
+              format[vv] = v.format
+            }
           })
         }
         if (v.itemType === 'daterange') {
@@ -116,7 +123,8 @@
         params,
         datePrefix,
         selectOptionPrefix,
-        ...dataObj
+        ...dataObj,
+        format
       }
     },
     computed: {
@@ -141,11 +149,11 @@
         }
       },
       getParams() {
-        const { params, datePrefix } = this
+        const { params, datePrefix, format } = this
         let formattedForm = {}
         Object.keys(params).forEach(v => {
           if (v.indexOf(datePrefix) === -1) {
-            formattedForm[v] = params[v]
+            formattedForm[v] = format[v] ? format[v](params[v]) : params[v]
           }
         })
         return formattedForm

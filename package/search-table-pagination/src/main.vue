@@ -11,7 +11,10 @@
       :label-width="formOptions.labelWidth"
       :item-width="formOptions.itemWidth"
       :submit-handler="searchHandler"
-      :submit-loading="loading" />
+      :submit-loading="loading"
+      :showResetBtn="formOptions.showResetBtn"
+      :submitBtnText="formOptions.submitBtnText"
+      :resetBtnText="formOptions.resetBtnText" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
