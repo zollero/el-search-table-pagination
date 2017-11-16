@@ -129,6 +129,10 @@
       }
     },
     methods: {
+      isArray(value) {
+        const propType = typeof value
+        return propType === 'object' && Object.prototype.toString.call(v.prop) === '[object Array]'
+      },
       searchHandler() {
         const { submitHandler } = this
         if (submitHandler) {
@@ -158,12 +162,14 @@
       getRemoteData({ fetch, dataKey, resultField, resultHandler }) {
         fetch().then(response => {
           let result = response
-          if (resultField.indexOf('.') !== -1) {
-            resultField.split('.').forEach(vv => {
-              result = result[vv]
-            })
-          } else {
-            result = response[resultField]
+          if (typeof response === 'object' && !this.isArray(response)) {
+            if (resultField.indexOf('.') !== -1) {
+              resultField.split('.').forEach(vv => {
+                result = result[vv]
+              })
+            } else {
+              result = response[resultField]
+            }
           }
 
           if (!result || !(result instanceof Array)) {
