@@ -14,7 +14,8 @@
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
-      :resetBtnText="formOptions.resetBtnText" />
+      :resetBtnText="formOptions.resetBtnText"
+      :rules="formOptions.rules" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
@@ -391,11 +392,13 @@
     mounted() {
       const { type, autoLoad, data, formOptions } = this
       if (type === 'remote' && autoLoad) {
-        let params = {}
         if (formOptions) {
-          params = this.$refs['searchForm'].getParams()
+          this.$refs['searchForm'].getParams((error, params) => {
+            if (!error) {
+              this.fetchHandler(params)
+            }
+          })
         }
-        this.fetchHandler(params)
       } else if (type === 'local') {
         this.loadLocalData(data)
       }

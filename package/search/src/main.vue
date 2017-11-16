@@ -4,7 +4,7 @@
     :label-width="labelWidth ? (labelWidth + 'px') : ''">
     <el-form-item v-for="(form, index) in forms" :key="index"
       :prop="form.itemType != 'daterange' ? form.prop : (datePrefix + index)"
-      :label="form.label">
+      :label="form.label" :rules="form.rules || []">
       <el-input v-if="form.itemType === 'input' || form.itemType === undefined"
         v-model="params[form.modelValue]"
         :size="form.size ? form.size : size"
@@ -141,22 +141,32 @@
         return typeof value === 'object' && Object.prototype.toString.call(value) === '[object Array]'
       },
       searchHandler() {
-        const { submitHandler } = this
-        if (submitHandler) {
-          submitHandler(this.getParams())
-        } else {
-          throw new Error('Need to set attribute: submitHandler !')
-        }
-      },
-      getParams() {
-        const { params, datePrefix, format } = this
-        let formattedForm = {}
-        Object.keys(params).forEach(v => {
-          if (v.indexOf(datePrefix) === -1) {
-            formattedForm[v] = format[v] ? format[v](params[v], v) : params[v]
+        this.getParams((error, params) => {
+          if(!error) {
+            const { submitHandler } = this
+            if (submitHandler) {
+              submitHandler(params)
+            } else {
+              throw new Error('Need to set attribute: submitHandler !')
+            }
           }
         })
-        return formattedForm
+      },
+      getParams(callback) {
+        this.$refs['form'].validate(valid => {
+          if (valid) {
+            const { params, datePrefix, format } = this
+            let formattedForm = {}
+            Object.keys(params).forEach(v => {
+              if (v.indexOf(datePrefix) === -1) {
+                formattedForm[v] = format[v] ? format[v](params[v], v) : params[v]
+              }
+            })
+            if (callback) callback(null, formattedForm)
+          } else {
+            if (callback) callback(new Error())
+          }
+        })
       },
       resetForm() {
         this.$refs['form'].resetFields()

@@ -77,6 +77,7 @@ export const formProps = {
         return {}
       }
     },
+    rules: Array,
     pickerOptions: Object
   }
 }

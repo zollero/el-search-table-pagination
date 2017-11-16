@@ -1,6 +1,6 @@
 {
   "name": "el-search-table-pagination",
-  "version": "0.3.11",
+  "version": "0.4.0",
   "description": "A component which combines form、table with pagination components in Element UI. ",
   "main": "./src/index.js",
   "scripts": {
