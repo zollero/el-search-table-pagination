@@ -390,14 +390,16 @@
       }
     },
     mounted() {
-      const { type, autoLoad, data, formOptions } = this
+      const { type, autoLoad, data, formOptions, params } = this
       if (type === 'remote' && autoLoad) {
         if (formOptions) {
-          this.$refs['searchForm'].getParams((error, params) => {
+          this.$refs['searchForm'].getParams((error, formParams) => {
             if (!error) {
-              this.fetchHandler(params)
+              this.fetchHandler(Object.assign(formParams, params))
             }
           })
+        } else {
+          this.fetchHandler(params)
         }
       } else if (type === 'local') {
         this.loadLocalData(data)
