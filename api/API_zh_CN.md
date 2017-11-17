@@ -59,3 +59,4 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection, row |
 | select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
 | selection-change | 当选择项发生变化时会触发该事件 | selection |
+| row-click | 当某一行被点击时会触发该事件 | row, event, column |

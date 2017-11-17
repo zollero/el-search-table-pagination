@@ -59,4 +59,5 @@ submitHandler | function to hander click event of submit button, the will receiv
 | select | triggers when user clicks the checkbox in a row | selection, row |
 | select-all | triggers when user clicks the checkbox in table header | selection |
 | selection-change | triggers when selection changes | selection |
+|row-click | triggers when clicking a row | row, event, column
 
