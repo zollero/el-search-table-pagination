@@ -26,7 +26,7 @@
       :row-class-name="rowClassName"
       style="width: 100%;margin-top:20px;"
       @select="selectHandler" @select-all="selectAllHandler"
-      @selection-change="selectionChangeHandler">
+      @selection-change="selectionChangeHandler" @row-click="clickHandler">
 
       <slot name="prepend" />
 
@@ -376,6 +376,9 @@
       },
       selectionChangeHandler() {
         this.$emit('selection-change', arguments)
+      },
+      clickHandler() {
+        this.$emit('row-click', arguments)
       },
       loadLocalData(data) {
         if (!data) {
