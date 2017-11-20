@@ -22,20 +22,71 @@
     <slot />
 
     <el-table v-loading.lock="loading"
-      :data="tableData" border stripe
+      :data="tableData"
+      :border="border"
+      :stripe="stripe"
+      :height="height"
+      :max-height="maxHeight"
+      :fit="fit"
+      :show-header="showHeader"
+      :highlight-current-row="highlightCurrentRow"
+      :current-row-key="currentRowKey"
       :row-class-name="rowClassName"
+      :row-style="rowStyle"
+      :row-ket="rowKey"
+      :empty-text="emptyText"
+      :default-expand-all="defaultExpandAll"
+      :expand-row-keys="expandRowKeys"
+      :default-sort="defaultSort"
+      :tooltip-effect="tooltipEffect"
+      :show-summary="showSummary"
+      :sum-text="sumText"
+      :summary-method="summaryMethod"
       style="width: 100%;margin-top:20px;"
-      @select="selectHandler"
-      @select-all="selectAllHandler"
-      @selection-change="selectionChangeHandler"
-      @row-click="rowClickHandler">
+      @select="() => emitEventHandler('select')"
+      @select-all="() => emitEventHandler('select-all')"
+      @selection-change="() => emitEventHandler('selection-change')"
+      @cell-mouse-enter="() => emitEventHandler('cell-mouse-enter')"
+      @cell-mouse-leave="() => emitEventHandler('cell-mouse-leave')"
+      @cell-click="() => emitEventHandler('cell-click')"
+      @cell-dblclick="() => emitEventHandler('cell-dblclick')"
+      @row-click="() => emitEventHandler('row-click')"
+      @row-dblclick="() => emitEventHandler('row-dblclick')"
+      @row-contextmenu="() => emitEventHandler('row-contextmenu')"
+      @header-click="() => emitEventHandler('header-click')"
+      @sort-change="() => emitEventHandler('sort-change')"
+      @filter-change="() => emitEventHandler('filter-change')"
+      @current-change="() => emitEventHandler('current-change')"
+      @header-dragend="() => emitEventHandler('header-dragend')"
+      @expand="() => emitEventHandler('expand')" >
 
       <slot name="prepend" />
 
-      <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
-        :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
+      <el-table-column
+        v-for="(column, columnIndex) in columns" :key="columnIndex"
+        :column-key="column.columnKey"
+        :prop="column.prop"
+        :label="column.label"
+        :width="column.minWidth ? '-' : (column.width || 140)"
         :minWidth="column.minWidth || column.width || 140"
-        :align="column.align" :class-name="column.className">
+        :fixed="column.fixed"
+        :render-header="column.renderHeader"
+        :sortable="column.sortable"
+        :sort-method="column.method"
+        :resizable="column.resizable"
+        :formatter="column.formatter"
+        :show-overflow-tooltip="column.showOverflowTooltip"
+        :align="column.align"
+        :header-align="column.headerAlign || column.align"
+        :class-name="column.className"
+        :label-class-name="column.labelClassName"
+        :selectable="column.selectable"
+        :reserve-selection="column.reserveSelection"
+        :filters="column.filters"
+        :filter-placement="column.filterPlacement"
+        :filter-multiple="column.filterMultiple"
+        :filter-method="column.filterMethod"
+        :filtered-value="column.filteredValue">
         <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
@@ -240,18 +291,21 @@
           this.loading = false
         })
       },
-      selectHandler() {
-        this.$emit('select', arguments)
+      emitEventHandler(event) {
+        this.$emit(event, arguments)
       },
-      selectAllHandler() {
-        this.$emit('select-all', arguments)
-      },
-      selectionChangeHandler() {
-        this.$emit('selection-change', arguments)
-      },
-      rowClickHandler() {
-        this.$emit('row-click', arguments)
-      },
+      // selectHandler() {
+      //   this.$emit('select', arguments)
+      // },
+      // selectAllHandler() {
+      //   this.$emit('select-all', arguments)
+      // },
+      // selectionChangeHandler() {
+      //   this.$emit('selection-change', arguments)
+      // },
+      // rowClickHandler() {
+      //   this.$emit('row-click', arguments)
+      // },
       loadLocalData(data) {
         if (!data) {
           throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)

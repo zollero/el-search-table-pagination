@@ -2,6 +2,39 @@
 import { formProps } from '../../search/src/props'
 
 let props = {
+  // Element UI Table attributes
+  height: [String, Number],
+  maxHeight: [String, Number],
+  stripe: {
+    type: Boolean,
+    default: true
+  },
+  border: {
+    type: Boolean,
+    default: false
+  },
+  fit: {
+    type: Boolean,
+    default: true
+  },
+  showHeader: {
+    type: Boolean,
+    default: true
+  },
+  highlightCurrentRow: Boolean,
+  currentRowKey: [String, Number],
+  rowClassName: [String, Function],
+  rowStyle: [String, Function],
+  rowKey: [String, Function],
+  emptyText: String,
+  defaultExpandAll: Boolean,
+  expandRowKeys: Array,
+  defaultSort: Object,
+  tooltipEffect: String,
+  showSummary: Boolean,
+  sumText: String,
+  summaryMethod: Function,
+  // custom attributes
   fetch: {
     type: Function
   },
@@ -21,10 +54,6 @@ let props = {
     default: () => {
       return {}
     }
-  },
-  rowClassName: {
-    type: String,
-    default: ''
   },
   listField: {
     type: String,
@@ -68,32 +97,52 @@ let props = {
   columns: {
     type: Array,
     required: true,
-    prop: {
-      type: String,
-      required: true
-    },
+    // Element UI table-column attribute
+    columnKey: String,
     label: {
       type: String,
       required: true
     },
-    width: {
-      type: Number
+    prop: {
+      type: String,
+      required: true
     },
-    minWidth: {
-      type: Number
+    width: Number,
+    minWidth: Number,
+    fixed: [Boolean, String],
+    renderHeader: Function,
+    sortable: [Boolean, String],
+    sortMethod: Function,
+    resizable: {
+      type: Boolean,
+      default: true
     },
+    formatter: Function,
+    showOverflowTooltip: Boolean,
     align: {
       type: String,
-      default: 'left',
-      validator(value) {
-        const alignTypes = ['left', 'center', 'right']
-        const isValid = alignTypes.indexOf(value) === -1
-        if (isValid) {
-          throw new Error(`The value for 'align' is invalid, you can choose on in ['left', 'center', 'right']`)
-        }
-        return isValid
-      }
+      default: 'left'
     },
+    headerAlign: String,
+    className: {
+      type: String,
+      default: ''
+    },
+    labelClassName: {
+      type: String,
+      default: ''
+    },
+    selectable: Function,
+    reserveSelection: Boolean,
+    filters: Array,
+    filterPlacement: String,
+    filterMultiple: {
+      type: Boolean,
+      default: true
+    },
+    filterMethod: Function,
+    filteredValue: Array,
+    // custom table-column attribute
     filter: {
       type: String
     },
@@ -102,10 +151,6 @@ let props = {
     },
     slotName: {
       type: String
-    },
-    className: {
-      type: String,
-      default: ''
     }
   },
   showPagination: {
