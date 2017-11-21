@@ -41,25 +41,8 @@ Vue.use(ElSearchTablePagination, {
   <div>
     <el-search-table-pagination
       url="example.xxx.com/list"
-      :params="searchParams"
-      :columns="columns">
-            
-      <!-- If you are using Vue v2.5 or higher version, 
-           please replace `scope="scope"` to `slot-scope="scope"` -->
-      <template slot="form" scope="scope">
-        <el-form :inline="true" :model="searchParams">
-          <el-form-item label="Name" prop="name">
-            <el-input v-model="searchParams.name" ></el-input>
-          </el-form-item>
-          <el-form-item label="Mobile" prop="mobile">
-            <el-input v-model="searchParams.mobile" ></el-input>
-          </el-form-item>
-
-          <el-button @click="scope.search" :loading="scope.loading">
-            Search
-          </el-button>
-        </el-form>
-      </template>
+      :columns="columns"
+      :formOptions="formOptions">
     </el-search-table-pagination>
   </div>
 </template>
@@ -68,9 +51,30 @@ Vue.use(ElSearchTablePagination, {
   export default {
     data() {
       return {
-        searchParams: {
-          name: '',
-          mobile: ''
+        formOptions: {
+          inline: true,
+          submitBtnText: 'Search',
+          forms: [{
+            prop: 'name',
+            label: 'Name'
+          }, {
+            prop: 'mobile',
+            label: 'Mobile'
+          }, {
+            prop: 'sex',
+            label: 'Sex',
+            itemType: 'select',
+            options: [{
+              value: '',
+              label: 'All'
+            }, {
+              value: 0,
+              label: 'Male'
+            }, {
+              value: 1,
+              label: 'Female'
+            }]
+          }]
         },
         columns: [{
           prop: 'name',
@@ -111,26 +115,9 @@ And the Test page is the image above.
     <el-search-table-pagination
       type="local"
       :data="tableData"
-      :page-sizes="[2, 5, 10]"
-      :params="searchParams"
-      :columns="columns">
-            
-      <!-- If you are using Vue v2.5 or higher version, 
-           please replace `scope="scope"` to `slot-scope="scope"` -->
-      <template slot="form" scope="scope">
-        <el-form :inline="true" :model="searchParams">
-          <el-form-item label="Name" prop="name">
-            <el-input v-model="searchParams.name" ></el-input>
-          </el-form-item>
-          <el-form-item label="Mobile" prop="mobile">
-            <el-input v-model="searchParams.mobile" ></el-input>
-          </el-form-item>
-
-          <el-button @click="scope.search" :loading="scope.loading">
-            Search
-          </el-button>
-        </el-form>
-      </template>
+      :page-sizes="[5, 10]"
+      :columns="columns"
+      :form-options="formOptions">
     </el-search-table-pagination>
   </div>
 </template>
@@ -139,9 +126,30 @@ And the Test page is the image above.
   export default {
     data() {
       return {
-        searchParams: {
-          name: '',
-          mobile: ''
+        formOptions: {
+          inline: true,
+          submitBtnText: 'Search',
+          forms: [{
+            prop: 'name',
+            label: 'Name'
+          }, {
+            prop: 'mobile',
+            label: 'Mobile'
+          }, {
+            prop: 'sex',
+            label: 'Sex',
+            itemType: 'select',
+            options: [{
+              value: '',
+              label: 'All'
+            }, {
+              value: 0,
+              label: 'Male'
+            }, {
+              value: 1,
+              label: 'Female'
+            }]
+          }]
         },
         columns: [{
           prop: 'name',
@@ -154,7 +162,7 @@ And the Test page is the image above.
         }, {
           prop: 'sex',
           label: 'Sex',
-          width: 80,
+          width: 100,
           render: row => {
             if (row.sex === 0) {
               return 'Male'
