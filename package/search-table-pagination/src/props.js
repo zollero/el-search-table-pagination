@@ -5,14 +5,8 @@ let props = {
   // Element UI Table attributes
   height: [String, Number],
   maxHeight: [String, Number],
-  stripe: {
-    type: Boolean,
-    default: true
-  },
-  border: {
-    type: Boolean,
-    default: false
-  },
+  stripe: Boolean,
+  border: Boolean,
   fit: {
     type: Boolean,
     default: true

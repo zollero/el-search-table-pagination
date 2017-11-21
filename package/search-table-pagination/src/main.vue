@@ -43,22 +43,22 @@
       :sum-text="sumText"
       :summary-method="summaryMethod"
       style="width: 100%;margin-top:20px;"
-      @select="() => emitEventHandler('select')"
-      @select-all="() => emitEventHandler('select-all')"
-      @selection-change="() => emitEventHandler('selection-change')"
-      @cell-mouse-enter="() => emitEventHandler('cell-mouse-enter')"
-      @cell-mouse-leave="() => emitEventHandler('cell-mouse-leave')"
-      @cell-click="() => emitEventHandler('cell-click')"
-      @cell-dblclick="() => emitEventHandler('cell-dblclick')"
-      @row-click="() => emitEventHandler('row-click')"
-      @row-dblclick="() => emitEventHandler('row-dblclick')"
-      @row-contextmenu="() => emitEventHandler('row-contextmenu')"
-      @header-click="() => emitEventHandler('header-click')"
-      @sort-change="() => emitEventHandler('sort-change')"
-      @filter-change="() => emitEventHandler('filter-change')"
-      @current-change="() => emitEventHandler('current-change')"
-      @header-dragend="() => emitEventHandler('header-dragend')"
-      @expand="() => emitEventHandler('expand')" >
+      @select="(selection, row) => emitEventHandler('select', selection, row)"
+      @select-all="selection => emitEventHandler('select-all', selection)"
+      @selection-change="selection => emitEventHandler('selection-change', selection)"
+      @cell-mouse-enter="(row, column, cell, event) => emitEventHandler('cell-mouse-enter', row, column, cell, event)"
+      @cell-mouse-leave="(row, column, cell, event) => emitEventHandler('cell-mouse-leave', row, column, cell, event)"
+      @cell-click="(row, column, cell, event) => emitEventHandler('cell-click', row, column, cell, event)"
+      @cell-dblclick="(row, column, cell, event) => emitEventHandler('cell-dblclick', row, column, cell, event)"
+      @row-click="(row, event, column) => emitEventHandler('row-click', row, event, column)"
+      @row-dblclick="(row, event) => emitEventHandler('row-dblclick', row, event)"
+      @row-contextmenu="(row, event) => emitEventHandler('row-contextmenu', row, event)"
+      @header-click="(column, event) => emitEventHandler('header-click', column, event)"
+      @sort-change="args => emitEventHandler('sort-change', args)"
+      @filter-change="filters => emitEventHandler('filter-change', filters)"
+      @current-change="(currentRow, oldCurrentRow) => emitEventHandler('current-change', currentRow, oldCurrentRow)"
+      @header-dragend="(newWidth, oldWidth, column, event) => emitEventHandler('header-dragend', newWidth, oldWidth, column, event)"
+      @expand="(row, expanded) => emitEventHandler('expand', row, expanded)" >
 
       <slot name="prepend" />
 
@@ -182,20 +182,23 @@
           return i >= (pageIndex - 1) * pageSize && i < pageIndex * pageSize
         })
       },
-      dataFilterHandler() {
+      dataFilterHandler(formParams) {
         const { cacheLocalData, params, pagination } = this
         const { pageIndex, pageSize } = pagination
-        const validParamKeys = Object.keys(params).filter(v => {
-          return params[v] !== undefined && params[v].trim() !== ''
+        const mergeParams = Object.assign(params, formParams)
+        console.log('mergeParams: ', mergeParams)
+        const validParamKeys = Object.keys(mergeParams).filter(v => {
+          return mergeParams[v] !== undefined && mergeParams[v] !== ''
         })
+        console.log('ddd', validParamKeys)
         if (validParamKeys.length > 0) {
           const validData = cacheLocalData.filter(v => {
             let valids = []
             validParamKeys.forEach(vv => {
               if (typeof v[vv] === 'number') {
-                valids.push(String(v[vv]) === params[vv])
+                valids.push(String(v[vv]) === String(mergeParams[vv]))
               } else {
-                valids.push(v[vv] === params[vv])
+                valids.push(v[vv] === mergeParams[vv])
               }
             })
             return valids.every(vvv => {
@@ -292,20 +295,8 @@
         })
       },
       emitEventHandler(event) {
-        this.$emit(event, arguments)
+        this.$emit(event, ...Array.from(arguments).slice(1))
       },
-      // selectHandler() {
-      //   this.$emit('select', arguments)
-      // },
-      // selectAllHandler() {
-      //   this.$emit('select-all', arguments)
-      // },
-      // selectionChangeHandler() {
-      //   this.$emit('selection-change', arguments)
-      // },
-      // rowClickHandler() {
-      //   this.$emit('row-click', arguments)
-      // },
       loadLocalData(data) {
         if (!data) {
           throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
