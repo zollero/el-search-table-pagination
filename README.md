@@ -6,7 +6,7 @@
 
 ![Screen shot](./screenshot/el-search-table-pagination.png)
 
-[See **Quick Start**](#quick-start)
+[See the code of the **Screen shot**](#quick-start)
 
 ## Install
 
