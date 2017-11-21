@@ -43,7 +43,7 @@
 
 支持的`Element UI Table column`属性有：column-key / fixed / render-header / sortable / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value 。
 
-## Form Option 属性
+### Form Option 属性
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- |------|:----:|-----|:-----:|
@@ -64,7 +64,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | --- |------|:----:|-----|:-----:|
 | label | form表单标签 | string | - | - |
 | prop | form表单属性key值 | string | - | - |
-| itemType | 表单类型，目前支持input/select/date/daterange四种表单 | string | - | - |
+| itemType | 表单类型，目前支持input/select/date/daterange四种表单 | string | input/select/date/daterange | - |
 | size | 表单尺寸 | string | large/small/mini | - |
 | placeholder | 表单占位文本 | string | - | - |
 | editable | 是否可输入，对date/daterange有效 | boolean | true/false | true |
@@ -75,7 +75,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | selectResultField | select远程数据接口返回值的数据对应key值，对应的数组中的元素可以是string或object | string | | - | result |
 | selectResultHandler | select远程数据接口array数据的map处理函数 | function | - | - |
 | selectUrl | select远程数据接口地址，设置该属性后，selectFetch属性则无效 | string - | - |
-| selectMethod | select远程接口调用方法，该属性配合selectUrl使用 | string | - | - |
+| selectMethod | select远程接口调用方法，该属性配合selectUrl使用 | string | get/post | - |
 | selectParams | 调用select远程接口的参数 | object | - | - |
 | valueKey | 当option是对象时有效。select option的value的key值 | string | - | value |
 | labelKey | 当option是对象时有效。select option的label的key值 | string | - | label |
