@@ -14,9 +14,9 @@
 | list-field | 接口返回值对应数据的字段值 | string | - | data.list |
 | total-field | 接口返回值对应数据总数的字段值 | string | - | data.total |
 | params | 搜索参数 | object | - | - |
-| form-options | form表单设置(见下方**Form Option 属性**) | object | - | - |
+| form-options | form表单设置(见下方[**Form Option 属性**](#form-option-属性)) | object | - | - |
 | data-handler | 数组数据的 map 处理函数 | function | - | - |
-| columns | table column配置对象的数组。具体配置见下面**Table column 属性** | array | - | - |
+| columns | table column配置对象的数组。具体配置见下面[**Table column 属性**](#table-column-属性) | array | - | - |
 | show-pagination | 是否显示分页组件，如设为false，查询时不传分页参数 | boolean | true, false | true |
 | page-sizes | 每页显示个数的控件选项 | array | - | [20, 50, 100] |
 | pagination-layout | 分页控件的结构，每个类型用逗号分隔 | string | sizes, prev, pager, next, jumper, ->, total, slot | total, prev, pager, next, jumper, sizes |
@@ -47,7 +47,7 @@
 
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- |------|:----:|-----|:-----:|
-| forms | form表单配置对象数组。<br/>**label**: form表单标签。<br/>**prop**: form表单属性key值。string。<br/>**itemType**: 表单类型，目前支持input/select/date/daterange四种表单。string。<br/>**size**: 表单尺寸，可选值：large/small/mini。string。<br/>**placeholder**: 表单占位文本。string。<br/>**editable**: 是否可输入，对date/daterange有效。boolean。<br/>**disabled**: 禁用。boolean。<br/>**readonly**: 只读，对input/date/daterange有效。boolean。<br/>**options**: 填充select下拉option的数组数据，数组元素可以是string或object。array。<br/>**selectFetch**: 获取远程数据填充select下拉option数据的函数，函数需返回一个promise，如果设置了selectUrl，则该属性无效。function。<br/>**selectResultField**: select远程数据接口返回值的数据对应key值，默认为'result'，对应的数组中的元素可以是string或object。string。<br/>**selectResultHandler**: select远程数据接口array数据的map处理函数。function。<br/>**selectUrl**: select远程数据接口地址，设置该属性后，selectFetch属性则无效。string。<br/>**selectMethod**: select远程接口调用方法，该属性配合selectUrl使用。string。<br/>**selectParams**: 调用select远程接口的参数。object。<br/>**valueKey**: 当option是对象时有效。select option的value的key值，默认为 'value'。string。<br/>**labelKey**: 当option是对象时有效。select option的label的key值，默认为 'label'。string。<br/>**rules**: 表单验证规则。object。<br/>**format**: 提供一个函数对form表单的结果进行处理，这个函数接收两个参数：form 表单的值 和 表单的 key（即 prop），函数需要将处理后的结果return出来。function。<br/>**pickerOptions**: 当前时间日期选择器特有的选项，对 date/daterange 有效。object。 | array[object] | - | - |
+| forms | form表单配置对象数组。详情见[**Form Item 属性**](#form-item-属性) | array[object] | - | - |
 | size | 全局的表单尺寸 | string | large/small/mini | - |
 | showResetBtn | 是否显示'重置'按钮 | boolean | - | false
 | inline | 行内表单模式 | boolean | - | false |
@@ -63,7 +63,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | --- |------|:----:|-----|:-----:|
 | label | form表单标签 | string | - | - |
-| prop** | form表单属性key值 | string | - | - |
+| prop | form表单属性key值 | string | - | - |
 | itemType | 表单类型，目前支持input/select/date/daterange四种表单 | string | - | - |
 | size | 表单尺寸 | string | large/small/mini | - |
 | placeholder | 表单占位文本 | string | - | - |
@@ -81,7 +81,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | labelKey | 当option是对象时有效。select option的label的key值 | string | - | label |
 | rules | 表单验证规则 | object | - | - |
 | format | 提供一个函数对form表单的结果进行处理，这个函数接收两个参数：form 表单的值 和 表单的 key（即 prop），函数需要将处理后的结果return出来 | function | - | - |
-| pickerOptions** | 当前时间日期选择器特有的选项，对 date/daterange 有效 | object | - | - |
+| pickerOptions | 当前时间日期选择器特有的选项，对 date/daterange 有效 | object | - | - |
 
 ## 函数
 
