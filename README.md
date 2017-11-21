@@ -1,10 +1,12 @@
 # Element search table pagination
 
-> Combine table and pagination components of [Element UI](https://github.com/ElemeFE/element) together. Based on Vue 2.x.
+> Combines Form, Table and Pagination components of [Element UI](https://github.com/ElemeFE/element) together. Based on Vue 2.x.
 
-> You can use this package to show local and remote list data in table with pagination.
+> You can use this package to show local and remote list data in table with search form and pagination.
 
 ![Screen shot](./screenshot/el-search-table-pagination.png)
+
+[See **Quick Start**](#quick-start)
 
 ## Install
 
