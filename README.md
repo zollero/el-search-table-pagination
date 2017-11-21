@@ -16,7 +16,7 @@ $ npm i --save el-search-table-pagination
 
 ## API
 
-[API](./api/API_en.md)  |  [中文API](./api/API_zh_CN.md)
+[API](./docs/en_US.md)  |  [中文API](./docs/zh_CN.md)
 
 ## Quick Start
 
