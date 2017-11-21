@@ -14,8 +14,7 @@
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
-      :resetBtnText="formOptions.resetBtnText"
-      :rules="formOptions.rules" />
+      :resetBtnText="formOptions.resetBtnText" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
@@ -266,7 +265,7 @@
           }
 
           if (!result || !(result instanceof Array)) {
-            throw new Error(`The result of key:${listField} is not Array. 接口返回的字段:${listField} 不是一个数组`)
+            throw new Error(`The result of key:${listField} is not Array.`)
             this.loading = false
             return false
           }
