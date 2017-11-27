@@ -66,6 +66,8 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | prop | form表单属性key值 | string | - | - |
 | itemType | 表单类型，目前支持input/select/date/daterange四种表单 | string | input/select/date/daterange | - |
 | size | 表单尺寸 | string | large/small/mini | - |
+| labelWidth | 表单域标签的宽度 | number | - | - |
+| itemWidth | 表单域宽度 | number | - | - |
 | placeholder | 表单占位文本 | string | - | - |
 | editable | 是否可输入，对date/daterange有效 | boolean | true/false | true |
 | disabled | 禁用 | boolean | true/false | false |

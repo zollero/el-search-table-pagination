@@ -51,7 +51,7 @@ Supported attributes of `Element UI Table column`: column-key / fixed / render-h
 | size | size of form item | string | large/small/mini | - |
 | showResetBtn | whether to show the reset button | boolean | - | false
 | inline | whether the form is inline | boolean | - | false |
-| labelWidth | width of label, and all its direct child form items will inherit this value | number | - | - |
+| labelWidth | width of form label, and all its direct child form items will inherit this value | number | - | - |
 | itemWidth | width of form item, and all its direct child form items will inherit this value | number | - | - |
 submitHandler | function to hander click event of submit button, the will receive the form object as the first argument | function | - | - |
 | submitLoading | detemine whether the button is loading | boolean | - | - |
@@ -66,6 +66,8 @@ submitHandler | function to hander click event of submit button, the will receiv
 | prop | form item prop's key | string | - | - |
 | itemType | form item type, Recently, only input/select/date/daterange are avaliable | string | input/select/date/daterange | - |
 | size | form item size | string | large/small/mini | - |
+| labelWidth | width of form label | - | - |
+| itemWidth | width of form item | number | - | - |
 | placeholder | placeholder of form item | string | - | - |
 | editable | whether the input is editable, only avaliable for date/daterange | boolean | true/false | true |
 | disabled | whether the form item is disabled | boolean | true/false | false |
