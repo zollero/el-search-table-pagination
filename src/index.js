@@ -1,6 +1,6 @@
 
-import SearchTablePagination from '../package/search-table-pagination/index.js'
-import SearchForm from '../package/search/index.js'
+import SearchTablePagination from '../packages/search-table-pagination/index.js'
+import SearchForm from '../packages/search/index.js'
 
 import packageInfo from '../package.json'
 

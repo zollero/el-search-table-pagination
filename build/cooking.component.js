@@ -15,13 +15,6 @@ cooking.set({
 
 cooking.add('output.filename', '[name].js');
 cooking.add('loader.js.exclude', config.jsexclude);
-// cooking.add('loader.js', {
-//   exclude: config.jsexclude,
-//   loader: 'babel-loader',
-//   options:{
-//     presets:["es2015"]
-//   },
-// });
 cooking.add('loader.scss', {
   test: /\.scss$/,
   loaders: ['style-loader', 'css-loader', 'sass-loader']

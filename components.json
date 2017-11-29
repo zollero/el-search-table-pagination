@@ -1,4 +1,4 @@
 {
-  "search": "./package/search/index.js",
-  "search-table-pagination": "./package/search-table-pagination/index.js"
+  "search": "./packages/search/index.js",
+  "search-table-pagination": "./packages/search-table-pagination/index.js"
 }
