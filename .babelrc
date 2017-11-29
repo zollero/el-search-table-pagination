@@ -1,0 +1,16 @@
+{
+  "presets": [["es2015", { "loose": true }], "stage-3"],
+  "plugins": ["transform-vue-jsx"],
+  "env": {
+    "utils": {
+      "plugins": [
+        ["module-resolver", {
+          "root": ["el-search-table-pagination"],
+          "alias": {
+            "el-search-table-pagination/src": "el-search-table-pagination/lib"
+          }
+        }]
+      ]
+    }
+  }
+}
