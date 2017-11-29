@@ -1,4 +1,5 @@
 var cooking = require('cooking');
+var webpack = require('webpack');
 var config = require('./config');
 
 cooking.set({
@@ -19,4 +20,9 @@ cooking.add('loader.scss', {
   loaders: ['style-loader', 'css-loader', 'sass-loader']
 });
 cooking.add('vue.preserveWhitespace', false);
+cooking.add('plugin.banner', new webpack.BannerPlugin({
+  banner: 'el-search-table-pagination\nCopyright(c) 2017 zollero\nMIT Licensed',
+  entryOnly: true
+}));
+
 module.exports = cooking.resolve();
