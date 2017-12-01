@@ -246,6 +246,20 @@
             }
           )
 
+          $axios.interceptors.response.use(
+            response => {
+              const { data, status, statusText } = response;
+              if (status === 200 && data !== null) {
+                return JSON.parse(JSON.stringify(data))
+              } else {
+                throw new Error(`ErrorCode: ${status}, ErrorText: ${statusText}`)
+              }
+            },
+            error => {
+              return Promise.reject(error.response)
+            }
+          )
+
           method = method.toLowerCase();
 
           if (method === 'get') {
@@ -254,7 +268,7 @@
             requestObject = $axios[method](url, params)
           }
         }
-        
+
         requestObject.then(response => {
           let result = response
           

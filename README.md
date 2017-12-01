@@ -14,6 +14,10 @@
 $ npm i --save el-search-table-pagination
 ```
 
+## Demos
+
+See demos of [**Local Data**](https://codepen.io/zollero/pen/wPRqYX) and [**Remote Data**](https://codepen.io/zollero/pen/xPmXBp) on **CodePen**.
+
 ## API
 
 [API](./docs/en_US.md)  |  [中文API](./docs/zh_CN.md)
@@ -35,18 +39,15 @@ Vue.use(ElSearchTablePagination, {
 })
 ```
 
-
 > Use this package to show **remote** data in a page:
 
 ```vue
 <template>
-  <div>
-    <el-search-table-pagination
-      url="example.xxx.com/list"
-      :columns="columns"
-      :formOptions="formOptions">
-    </el-search-table-pagination>
-  </div>
+  <el-search-table-pagination
+    url="example.xxx.com/list"
+    :columns="columns"
+    :formOptions="formOptions">
+  </el-search-table-pagination>
 </template>
 
 <script>
@@ -91,15 +92,13 @@ And the Test page is the image above.
 
 ```vue
 <template>
-  <div>
-    <el-search-table-pagination
-      type="local"
-      :data="tableData"
-      :page-sizes="[5, 10]"
-      :columns="columns"
-      :form-options="formOptions">
-    </el-search-table-pagination>
-  </div>
+  <el-search-table-pagination
+    type="local"
+    :data="tableData"
+    :page-sizes="[5, 10]"
+    :columns="columns"
+    :form-options="formOptions">
+  </el-search-table-pagination>
 </template>
 
 <script>
