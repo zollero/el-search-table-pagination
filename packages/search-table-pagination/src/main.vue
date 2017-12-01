@@ -254,19 +254,22 @@
             requestObject = $axios[method](url, params)
           }
         }
-
+        
         requestObject.then(response => {
           let result = response
-          if (listField.indexOf('.') !== -1) {
-            listField.split('.').forEach(vv => {
-              result = result[vv]
-            })
-          } else if(!response && !(response instanceof Array)) {
-            result = response[listField]
+          
+          if (response && !(response instanceof Array)) {
+            if (listField && listField.indexOf('.') !== -1) {
+              listField.split('.').forEach(vv => {
+                result = result[vv]
+              })
+            } else if(!response && !(response instanceof Array)) {
+              result = response[listField]
+            }
           }
 
           if (!result || !(result instanceof Array)) {
-            throw new Error(`The result of key:${listField} is not an Array.`)
+            throw new Error(`The result of key:${listField} is not Array.`)
             this.loading = false
             return false
           }
@@ -278,12 +281,12 @@
           }
 
           let totalValue = response
-          if (totalField.indexOf('.') !== -1) {
+          if (response[totalField] && totalField && totalField.indexOf('.') !== -1) {
             totalField.split('.').forEach(vv => {
               totalValue = totalValue[vv]
             })
           } else {
-            totalValue = response[totalField]
+            totalValue = response[totalField] || result.length
           }
 
           this.total = totalValue
@@ -299,7 +302,7 @@
       },
       loadLocalData(data) {
         if (!data) {
-          throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be an array.`)
+          throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
           this.showPagination = false
           return false
         }
