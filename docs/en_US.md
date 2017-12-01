@@ -118,4 +118,5 @@ submitHandler | function to hander click event of submit button, the will receiv
 | filter-change | column's key. If you need to use the filter-change event, this attribute is mandatory to identify which column is being filtered | filters |
 | current-change | triggers when current row changes | currentRow, oldCurrentRow |
 | header-dragend | triggers when finish dragging header | newWidth, oldWidth, column, event |
-| expand-change | triggers when user expands or collapses a row | row, expandedRows |
+| expand (v1.x) | triggers when user expands or collapses a row | row, expandedRows |
+| expand-change (v2.x) | triggers when user expands or collapses a row | row, expandedRows |
