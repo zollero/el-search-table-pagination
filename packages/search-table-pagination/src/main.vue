@@ -266,7 +266,7 @@
           }
 
           if (!result || !(result instanceof Array)) {
-            throw new Error(`The result of key:${listField} is not Array.`)
+            throw new Error(`The result of key:${listField} is not an Array.`)
             this.loading = false
             return false
           }
@@ -299,7 +299,7 @@
       },
       loadLocalData(data) {
         if (!data) {
-          throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
+          throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be an array.`)
           this.showPagination = false
           return false
         }
