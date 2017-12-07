@@ -263,7 +263,7 @@
               listField.split('.').forEach(vv => {
                 result = result[vv]
               })
-            } else if(!response && !(response instanceof Array)) {
+            } else {
               result = response[listField]
             }
           }
