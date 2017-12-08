@@ -57,7 +57,6 @@
       @filter-change="filters => emitEventHandler('filter-change', filters)"
       @current-change="(currentRow, oldCurrentRow) => emitEventHandler('current-change', currentRow, oldCurrentRow)"
       @header-dragend="(newWidth, oldWidth, column, event) => emitEventHandler('header-dragend', newWidth, oldWidth, column, event)"
-      @expand="(row, expanded) => emitEventHandler('expand', row, expanded)"
       @expand-change="(row, expanded) => emitEventHandler('expand-change', row, expanded)" >
 
       <slot name="prepend" />
@@ -257,7 +256,7 @@
 
         requestObject.then(response => {
           let result = response
-          
+
           if (response && !(response instanceof Array)) {
             if (listField && listField.indexOf('.') !== -1) {
               listField.split('.').forEach(vv => {
