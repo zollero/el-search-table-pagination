@@ -84,7 +84,7 @@ export const formProps = {
 
 function sizeValidator(value) {
   const methodTypes = ['large', 'small', 'mini'];
-  const valid = methodTypes.indexOf(value.toLowerCase()) !== -1
+  const valid = methodTypes.indexOf(value.toLowerCase()) !== -1 || value === ''
   if (!valid) {
     throw new Error(`Size must be one of ['large', 'small', 'mini']`)
   }

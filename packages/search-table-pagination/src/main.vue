@@ -14,26 +14,79 @@
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
-      :resetBtnText="formOptions.resetBtnText"
-      :rules="formOptions.rules" />
+      :resetBtnText="formOptions.resetBtnText" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
     <slot />
 
     <el-table v-loading.lock="loading"
-      :data="tableData" border stripe
+      :data="tableData"
+      :border="border"
+      :stripe="stripe"
+      :height="height"
+      :max-height="maxHeight"
+      :fit="fit"
+      :show-header="showHeader"
+      :highlight-current-row="highlightCurrentRow"
+      :current-row-key="currentRowKey"
       :row-class-name="rowClassName"
+      :row-style="rowStyle"
+      :row-ket="rowKey"
+      :empty-text="emptyText"
+      :default-expand-all="defaultExpandAll"
+      :expand-row-keys="expandRowKeys"
+      :default-sort="defaultSort"
+      :tooltip-effect="tooltipEffect"
+      :show-summary="showSummary"
+      :sum-text="sumText"
+      :summary-method="summaryMethod"
       style="width: 100%;margin-top:20px;"
-      @select="selectHandler" @select-all="selectAllHandler"
-      @selection-change="selectionChangeHandler" @row-click="rowClickHandler">
+      @select="(selection, row) => emitEventHandler('select', selection, row)"
+      @select-all="selection => emitEventHandler('select-all', selection)"
+      @selection-change="selection => emitEventHandler('selection-change', selection)"
+      @cell-mouse-enter="(row, column, cell, event) => emitEventHandler('cell-mouse-enter', row, column, cell, event)"
+      @cell-mouse-leave="(row, column, cell, event) => emitEventHandler('cell-mouse-leave', row, column, cell, event)"
+      @cell-click="(row, column, cell, event) => emitEventHandler('cell-click', row, column, cell, event)"
+      @cell-dblclick="(row, column, cell, event) => emitEventHandler('cell-dblclick', row, column, cell, event)"
+      @row-click="(row, event, column) => emitEventHandler('row-click', row, event, column)"
+      @row-dblclick="(row, event) => emitEventHandler('row-dblclick', row, event)"
+      @row-contextmenu="(row, event) => emitEventHandler('row-contextmenu', row, event)"
+      @header-click="(column, event) => emitEventHandler('header-click', column, event)"
+      @sort-change="args => emitEventHandler('sort-change', args)"
+      @filter-change="filters => emitEventHandler('filter-change', filters)"
+      @current-change="(currentRow, oldCurrentRow) => emitEventHandler('current-change', currentRow, oldCurrentRow)"
+      @header-dragend="(newWidth, oldWidth, column, event) => emitEventHandler('header-dragend', newWidth, oldWidth, column, event)"
+      @expand="(row, expanded) => emitEventHandler('expand', row, expanded)"
+      @expand-change="(row, expanded) => emitEventHandler('expand-change', row, expanded)" >
 
       <slot name="prepend" />
 
-      <el-table-column v-for="(column, columnIndex) in columns" :key="columnIndex"
-        :prop="column.prop" :label="column.label" :width="column.minWidth ? '-' : (column.width || 140)"
+      <el-table-column
+        v-for="(column, columnIndex) in columns" :key="columnIndex"
+        :column-key="column.columnKey"
+        :prop="column.prop"
+        :label="column.label"
+        :width="column.minWidth ? '-' : (column.width || 140)"
         :minWidth="column.minWidth || column.width || 140"
-        :align="column.align" :class-name="column.className">
+        :fixed="column.fixed"
+        :render-header="column.renderHeader"
+        :sortable="column.sortable"
+        :sort-method="column.method"
+        :resizable="column.resizable"
+        :formatter="column.formatter"
+        :show-overflow-tooltip="column.showOverflowTooltip"
+        :align="column.align"
+        :header-align="column.headerAlign || column.align"
+        :class-name="column.className"
+        :label-class-name="column.labelClassName"
+        :selectable="column.selectable"
+        :reserve-selection="column.reserveSelection"
+        :filters="column.filters"
+        :filter-placement="column.filterPlacement"
+        :filter-multiple="column.filterMultiple"
+        :filter-method="column.filterMethod"
+        :filtered-value="column.filteredValue">
         <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
@@ -68,7 +121,7 @@
 
 <script>
   import Vue from 'vue'
-  import { formProps } from '../../search/src/props'
+  import props from './props'
   import searchForm from '../../search/src/main.vue'
 
   export default {
@@ -76,137 +129,7 @@
     components: {
       searchForm
     },
-    props: {
-      fetch: {
-        type: Function
-      },
-      url: {
-        type: String
-      },
-      method: {
-        type: String,
-        default: 'get',
-        validator: value => {
-          const methodTypes = ['get', 'post', 'put', 'delete'];
-          return methodTypes.indexOf(value.toLowerCase()) !== -1;
-        }
-      },
-      headers: {
-        type: Object,
-        default: () => {
-          return {}
-        }
-      },
-      rowClassName: {
-        type: String,
-        default: ''
-      },
-      listField: {
-        type: String,
-        default: 'data.list'
-      },
-      totalField: {
-        type: String,
-        default: 'data.total'
-      },
-      params: {
-        type: Object,
-        default: () => {
-          return {}
-        }
-      },
-      formOptions: {
-        type: Object,
-        ...formProps
-      },
-      autoLoad: {
-        type: Boolean,
-        default: true
-      },
-      type: {
-        type: String,
-        default: 'remote',
-        validator(value) {
-          const types = ['remote', 'local']
-          const validType = types.indexOf(value) !== -1
-          if (!validType) {
-            throw new Error(`Invalid type of '${value}', please set one type of 'remote' or 'local'.`)
-          }
-          return validType
-        }
-      },
-      data: {
-        type: Array
-      },
-      dataHandler: {
-        type: Function
-      },
-      columns: {
-        type: Array,
-        required: true,
-        prop: {
-          type: String,
-          required: true
-        },
-        label: {
-          type: String,
-          required: true
-        },
-        width: {
-          type: Number
-        },
-        minWidth: {
-          type: Number
-        },
-        align: {
-          type: String,
-          default: 'left',
-          validator(value) {
-            const alignTypes = ['left', 'center', 'right']
-            const isValid = alignTypes.indexOf(value) === -1
-            if (isValid) {
-              throw new Error(`The value for 'align' is invalid, you can choose on in ['left', 'center', 'right']`)
-            }
-            return isValid
-          }
-        },
-        filter: {
-          type: String
-        },
-        render: {
-          type: Function
-        },
-        slotName: {
-          type: String
-        },
-        className: {
-          type: String,
-          default: ''
-        }
-      },
-      showPagination: {
-        type: Boolean,
-        default: true
-      },
-      pageSizes: {
-        type: Array,
-        default: () => {
-          return [20, 50, 100]
-        }
-      },
-      paginationLayout: {
-        type: String,
-        default: 'total, prev, pager, next, jumper, sizes'
-      },
-      pageIndexKey: {
-        type: String,
-        default: 'pageIndex'
-      },
-      pageSizeKey: {
-        type: String,
-        default: 'pageSize'
-      }
-    },
+    props,
     data() {
       const _this = this
       return {
@@ -259,20 +182,23 @@
           return i >= (pageIndex - 1) * pageSize && i < pageIndex * pageSize
         })
       },
-      dataFilterHandler() {
+      dataFilterHandler(formParams) {
         const { cacheLocalData, params, pagination } = this
         const { pageIndex, pageSize } = pagination
-        const validParamKeys = Object.keys(params).filter(v => {
-          return params[v] !== undefined && params[v].trim() !== ''
+        const mergeParams = Object.assign(params, formParams)
+        console.log('mergeParams: ', mergeParams)
+        const validParamKeys = Object.keys(mergeParams).filter(v => {
+          return mergeParams[v] !== undefined && mergeParams[v] !== ''
         })
+        console.log('ddd', validParamKeys)
         if (validParamKeys.length > 0) {
           const validData = cacheLocalData.filter(v => {
             let valids = []
             validParamKeys.forEach(vv => {
               if (typeof v[vv] === 'number') {
-                valids.push(String(v[vv]) === params[vv])
+                valids.push(String(v[vv]) === String(mergeParams[vv]))
               } else {
-                valids.push(v[vv] === params[vv])
+                valids.push(v[vv] === mergeParams[vv])
               }
             })
             return valids.every(vvv => {
@@ -331,16 +257,19 @@
 
         requestObject.then(response => {
           let result = response
-          if (listField.indexOf('.') !== -1) {
-            listField.split('.').forEach(vv => {
-              result = result[vv]
-            })
-          } else {
-            result = response[listField]
+          
+          if (response && !(response instanceof Array)) {
+            if (listField && listField.indexOf('.') !== -1) {
+              listField.split('.').forEach(vv => {
+                result = result[vv]
+              })
+            } else {
+              result = response[listField]
+            }
           }
 
           if (!result || !(result instanceof Array)) {
-            throw new Error(`The result of key:${listField} is not Array. 接口返回的字段:${listField} 不是一个数组`)
+            throw new Error(`The result of key:${listField} is not Array.`)
             this.loading = false
             return false
           }
@@ -352,12 +281,12 @@
           }
 
           let totalValue = response
-          if (totalField.indexOf('.') !== -1) {
+          if (response[totalField] && totalField && totalField.indexOf('.') !== -1) {
             totalField.split('.').forEach(vv => {
               totalValue = totalValue[vv]
             })
           } else {
-            totalValue = response[totalField]
+            totalValue = response[totalField] || result.length
           }
 
           this.total = totalValue
@@ -368,17 +297,8 @@
           this.loading = false
         })
       },
-      selectHandler() {
-        this.$emit('select', arguments)
-      },
-      selectAllHandler() {
-        this.$emit('select-all', arguments)
-      },
-      selectionChangeHandler() {
-        this.$emit('selection-change', arguments)
-      },
-      rowClickHandler() {
-        this.$emit('row-click', arguments)
+      emitEventHandler(event) {
+        this.$emit(event, ...Array.from(arguments).slice(1))
       },
       loadLocalData(data) {
         if (!data) {
@@ -393,14 +313,16 @@
       }
     },
     mounted() {
-      const { type, autoLoad, data, formOptions } = this
+      const { type, autoLoad, data, formOptions, params } = this
       if (type === 'remote' && autoLoad) {
         if (formOptions) {
-          this.$refs['searchForm'].getParams((error, params) => {
+          this.$refs['searchForm'].getParams((error, formParams) => {
             if (!error) {
-              this.fetchHandler(params)
+              this.fetchHandler(Object.assign(formParams, params))
             }
           })
+        } else {
+          this.fetchHandler(params)
         }
       } else if (type === 'local') {
         this.loadLocalData(data)

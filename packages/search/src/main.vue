@@ -4,20 +4,21 @@
     :label-width="labelWidth ? (labelWidth + 'px') : ''">
     <el-form-item v-for="(form, index) in forms" :key="index"
       :prop="form.itemType != 'daterange' ? form.prop : (datePrefix + index)"
-      :label="form.label" :rules="form.rules || []">
+      :label="form.label" :rules="form.rules || []"
+      :label-width="form.labelWidth ? (form.labelWidth + 'px') : ''">
       <el-input v-if="form.itemType === 'input' || form.itemType === undefined"
         v-model="params[form.modelValue]"
         :size="form.size ? form.size : size"
         :readonly="form.readonly"
         :disabled="form.disabled"
         :placeholder="form.placeholder"
-        :style="itemStyle" />
+        :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" />
       <el-select v-else-if="form.itemType === 'select'"
         v-model="params[form.modelValue]"
         :size="form.size ? form.size : size"
         :disabled="form.disabled"
         :placeholder="form.placeholder"
-        :style="itemStyle">
+        :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" >
         <el-option v-for="(option, optionIndex) in form.options" :key="optionIndex"
           :value="(typeof option === 'object') ? option[form.valueKey || 'value'] : option"
           :label="(typeof option === 'object') ? option[form.labelKey || 'label'] : option" />
@@ -32,7 +33,7 @@
         :disabled="form.disabled"
         :readonly="form.readonly"
         :editable="form.editable"
-        :style="itemStyle"
+        :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')"
         :picker-options="form.pickerOptions || {}" />
       <el-date-picker v-else-if="form.itemType === 'daterange'"
         v-model="params[form.modelValue]"
@@ -42,7 +43,7 @@
         :readonly="form.readonly"
         :editable="form.editable"
         :placeholder="form.placeholder"
-        :style="itemStyle"
+        :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')"
         :picker-options="form.pickerOptions || {}" />
     </el-form-item>
     <el-form-item label="">
