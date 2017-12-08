@@ -17,12 +17,7 @@ const install = function(Vue, opts = {}) {
     opts.axios = require('axios')
     opts.axios.interceptors.response.use(
       response => {
-        const { data, status, statusText } = response;
-        if (status === 200 && data !== null) {
-          return JSON.parse(JSON.stringify(data))
-        } else {
-          throw new Error(`ErrorCode: ${status}, ErrorText: ${statusText}`)
-        }
+        return JSON.parse(JSON.stringify(response.data))
       },
       error => {
         return Promise.reject(error.response)
