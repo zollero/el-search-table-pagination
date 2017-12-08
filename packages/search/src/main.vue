@@ -174,9 +174,14 @@
       },
       changeDate(date, startDate, endDate) {
         let dates
+        if (date === null) {
+          this.params[startDate] = ''
+          this.params[endDate] = ''
+          return
+        }
         if (typeof date === 'string') {
           dates = date.split(' - ')
-        } else {
+        } else if (date && date.hasOwnProperty('length')) {
           const firstDate = date[0]
           const secondDate = date[1]
           dates = [
@@ -202,7 +207,7 @@
           }
 
           if (!result || !(result instanceof Array)) {
-            throw new Error(`The result of key:${resultField} is not Array. 接口返回的字段:${resultField} 不是一个数组`)
+            console.warn(`The result of key:${resultField} is not Array. 接口返回的字段:${resultField} 不是一个数组`)
           }
 
           if (this.resultHandler) {
