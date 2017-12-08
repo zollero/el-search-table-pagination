@@ -21,6 +21,7 @@
     <slot />
 
     <el-table v-loading.lock="loading"
+      ref="table"
       :data="tableData"
       :border="border"
       :stripe="stripe"
@@ -57,7 +58,6 @@
       @filter-change="filters => emitEventHandler('filter-change', filters)"
       @current-change="(currentRow, oldCurrentRow) => emitEventHandler('current-change', currentRow, oldCurrentRow)"
       @header-dragend="(newWidth, oldWidth, column, event) => emitEventHandler('header-dragend', newWidth, oldWidth, column, event)"
-      @expand="(row, expanded) => emitEventHandler('expand', row, expanded)"
       @expand-change="(row, expanded) => emitEventHandler('expand-change', row, expanded)" >
 
       <slot name="prepend" />
@@ -152,7 +152,7 @@
     },
     computed: {
       newSlotScope() {
-        return Number(Vue.version.replace('.', '')) > 250
+        return Number(Vue.version.replace(/\./g, '')) >= 250
       }
     },
     methods: {
@@ -186,11 +186,9 @@
         const { cacheLocalData, params, pagination } = this
         const { pageIndex, pageSize } = pagination
         const mergeParams = Object.assign(params, formParams)
-        console.log('mergeParams: ', mergeParams)
         const validParamKeys = Object.keys(mergeParams).filter(v => {
           return mergeParams[v] !== undefined && mergeParams[v] !== ''
         })
-        console.log('ddd', validParamKeys)
         if (validParamKeys.length > 0) {
           const validData = cacheLocalData.filter(v => {
             let valids = []
@@ -313,6 +311,8 @@
       }
     },
     mounted() {
+      // event: expand changed to `expand-change` in Element v2.x
+      this.$refs['table'].$on('expand', (row, expanded) => this.emitEventHandler('expand', row, expanded))
       const { type, autoLoad, data, formOptions, params } = this
       if (type === 'remote' && autoLoad) {
         if (formOptions) {

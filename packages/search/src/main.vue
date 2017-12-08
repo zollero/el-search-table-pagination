@@ -173,7 +173,18 @@
         this.$refs['form'].resetFields()
       },
       changeDate(date, startDate, endDate) {
-        const dates = date.split(' - ')
+        let dates
+        if (typeof date === 'string') {
+          dates = date.split(' - ')
+        } else {
+          const firstDate = date[0]
+          const secondDate = date[1]
+          dates = [
+            `${firstDate.getFullYear()}-${('0' + (firstDate.getMonth() + 1)).substr(-2)}-${('0' + firstDate.getDate()).substr(-2)}`,
+            `${secondDate.getFullYear()}-${('0' + (secondDate.getMonth() + 1)).substr(-2)}-${('0' + secondDate.getDate()).substr(-2)}`
+          ]
+        }
+        
         this.params[startDate] = dates[0]
         this.params[endDate] = dates[1]
       },
