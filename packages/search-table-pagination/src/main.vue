@@ -279,7 +279,7 @@
           }
 
           let totalValue = response
-          if (response[totalField] && totalField && totalField.indexOf('.') !== -1) {
+          if (totalField && totalField.indexOf('.') !== -1) {
             totalField.split('.').forEach(vv => {
               totalValue = totalValue[vv]
             })
