@@ -1,6 +1,6 @@
 
 <template>
-  <el-form :model="params" :inline="inline" ref="form"
+  <el-form :model="params" :inline="inline" ref="form" @submit.native.prevent="searchHandler()"
     :label-width="labelWidth ? (labelWidth + 'px') : ''">
     <el-form-item v-for="(form, index) in forms" :key="index"
       :prop="form.itemType != 'daterange' ? form.prop : (datePrefix + index)"
