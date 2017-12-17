@@ -7,6 +7,7 @@
       ref="searchForm"
       :forms="formOptions.forms"
       :size="formOptions.size"
+      :fuzzy="formOptions.fuzzy"
       :inline="formOptions.inline"
       :label-width="formOptions.labelWidth"
       :item-width="formOptions.itemWidth"
@@ -189,14 +190,21 @@
         const validParamKeys = Object.keys(mergeParams).filter(v => {
           return mergeParams[v] !== undefined && mergeParams[v] !== ''
         })
+        const paramFuzzy = this.$refs['searchForm'].getParamFuzzy()
+
         if (validParamKeys.length > 0) {
           const validData = cacheLocalData.filter(v => {
             let valids = []
             validParamKeys.forEach(vv => {
               if (typeof v[vv] === 'number') {
-                valids.push(String(v[vv]) === String(mergeParams[vv]))
+                valids.push(
+                  paramFuzzy[vv] ? (String(v[vv]).indexOf(String(mergeParams[vv])) !== -1)
+                    : (String(v[vv]) === String(mergeParams[vv]))
+                )
               } else {
-                valids.push(v[vv] === mergeParams[vv])
+                valids.push(
+                  paramFuzzy[vv] ? (v[vv].indexOf(mergeParams[vv]) !== -1) : (v[vv] === mergeParams[vv])
+                )
               }
             })
             return valids.every(vvv => {
@@ -255,7 +263,7 @@
 
         requestObject.then(response => {
           let result = response
-          
+
           if (response && !(response instanceof Array)) {
             if (listField && listField.indexOf('.') !== -1) {
               listField.split('.').forEach(vv => {

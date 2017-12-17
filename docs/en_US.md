@@ -51,6 +51,7 @@ Supported attributes of `Element UI Table column`: column-key / fixed / render-h
 | size | size of form item | string | large/small/mini | - |
 | showResetBtn | whether to show the reset button | boolean | - | false
 | inline | whether the form is inline | boolean | - | false |
+| fuzzy | whether the form support fuzzy search, global setting, only avaliable for `local` data | boolean | - | false |
 | labelWidth | width of form label, and all its direct child form items will inherit this value | number | - | - |
 | itemWidth | width of form item, and all its direct child form items will inherit this value | number | - | - |
 submitHandler | function to hander click event of submit button, the will receive the form object as the first argument | function | - | - |
@@ -64,6 +65,7 @@ submitHandler | function to hander click event of submit button, the will receiv
 | --- |------|:----:|-----|:-----:|
 | label | form item label value | string | - | - |
 | prop | form item prop's key | string | - | - |
+| fuzzy | whether form item support fuzzy search, only avaliable for `local` data | boolean | - | false |
 | itemType | form item type, Recently, only input/select/date/daterange are avaliable | string | input/select/date/daterange | - |
 | size | form item size | string | large/small/mini | - |
 | labelWidth | width of form label | - | - |

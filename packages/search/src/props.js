@@ -13,6 +13,10 @@ export const formProps = {
     type: Boolean,
     default: false
   },
+  fuzzy: {
+    type: Boolean,
+    default: false
+  },
   labelWidth: Number,
   itemWidth: Number,
   submitHandler: Function,
@@ -59,6 +63,10 @@ export const formProps = {
       default: false
     },
     readonly: {
+      type: Boolean,
+      default: false
+    },
+    fuzzy: {
       type: Boolean,
       default: false
     },

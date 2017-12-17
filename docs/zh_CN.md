@@ -51,6 +51,7 @@
 | size | 全局的表单尺寸 | string | large/small/mini | - |
 | showResetBtn | 是否显示'重置'按钮 | boolean | - | false
 | inline | 行内表单模式 | boolean | - | false |
+| fuzzy | 搜索条件是否支持模糊搜索，全局设置，仅支持 local 数据展示 | boolean | - | false |
 | labelWidth | 表单域标签的宽度，作为 Form 直接子元素的 form-item 会继承该值 | number | - | - |
 | itemWidth | 表单域宽度 | number | - | - |
 submitHandler | 查询按钮的click处理函数，接收form表单对象数据作为第一个参数 | function | - | - |
@@ -64,6 +65,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | --- |------|:----:|-----|:-----:|
 | label | form表单标签 | string | - | - |
 | prop | form表单属性key值 | string | - | - |
+| fuzzy | 该 form item 是否支持模糊搜索，仅支持 local 数据展示 | boolean | - | false |
 | itemType | 表单类型，目前支持input/select/date/daterange四种表单 | string | input/select/date/daterange | - |
 | size | 表单尺寸 | string | large/small/mini | - |
 | labelWidth | 表单域标签的宽度 | number | - | - |

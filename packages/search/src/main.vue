@@ -71,7 +71,7 @@
     name: 'ElSearchForm',
     props: formProps,
     data() {
-      const { forms } = this.$props
+      const { forms, fuzzy } = this.$props
       const datePrefix = 'daterange-prefix'
       const selectOptionPrefix = 'select-option-prefix'
       let dataObj = {
@@ -80,12 +80,15 @@
 
       let params = {}
       let format = {}
+      let fuzzyOps = {}
 
       forms.forEach((v, i) => {
         const propType = typeof v.prop
         if (propType === 'string') {
           v.modelValue = v.prop
           params[v.prop] = ''
+
+          fuzzyOps[v.prop] = v.fuzzy ? v.fuzzy : fuzzy
           if (v.format) {
             format[v.prop] = v.format
           }
@@ -95,6 +98,8 @@
             if (v.format) {
               format[vv] = v.format
             }
+
+            fuzzyOps[vv] = v.fuzzy ? v.fuzzy : fuzzy
           })
         }
         if (v.itemType === 'daterange') {
@@ -125,7 +130,8 @@
         datePrefix,
         selectOptionPrefix,
         ...dataObj,
-        format
+        format,
+        fuzzyOps
       }
     },
     computed: {
@@ -152,6 +158,9 @@
             }
           }
         })
+      },
+      getParamFuzzy() {
+        return this.fuzzyOps
       },
       getParams(callback) {
         this.$refs['form'].validate(valid => {
@@ -189,7 +198,7 @@
             `${secondDate.getFullYear()}-${('0' + (secondDate.getMonth() + 1)).substr(-2)}-${('0' + secondDate.getDate()).substr(-2)}`
           ]
         }
-        
+
         this.params[startDate] = dates[0]
         this.params[endDate] = dates[1]
       },
