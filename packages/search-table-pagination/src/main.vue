@@ -287,19 +287,19 @@
           }
 
           let totalValue = response
-          if (totalField && totalField.indexOf('.') !== -1) {
+          if (response[totalField] && totalField && totalField.indexOf('.') !== -1) {
             totalField.split('.').forEach(vv => {
               totalValue = totalValue[vv]
             })
           } else {
-            totalValue = response[totalField] || result.length
+            totalValue = (response && response[totalField]) || result.length
           }
 
           this.total = totalValue
 
           this.loading = false
         }).catch(error => {
-          console.error('Get remote data failed. ', error)
+          // console.error('Get remote data failed. ', error)
           this.loading = false
         })
       },

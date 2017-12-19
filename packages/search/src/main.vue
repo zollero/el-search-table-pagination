@@ -19,10 +19,10 @@
         :disabled="form.disabled"
         :placeholder="form.placeholder"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" >
-        <el-option v-for="(option, optionIndex) in form.options" :key="optionIndex"
+        <el-option v-for="(option, optionIndex) in form.options" :key="optionIndex + '_local'"
           :value="(typeof option === 'object') ? option[form.valueKey || 'value'] : option"
           :label="(typeof option === 'object') ? option[form.labelKey || 'label'] : option" />
-        <el-option v-for="(op, opIndex) in selectOptions[selectOptionPrefix + index]" :key="opIndex"
+        <el-option v-for="(op, opIndex) in selectOptions[selectOptionPrefix + index]" :key="opIndex + '_remote'"
           :value="(typeof op === 'object') ? op[form.valueKey || 'value'] : op"
           :label="(typeof op === 'object') ? op[form.labelKey || 'label'] : op" />
       </el-select>
