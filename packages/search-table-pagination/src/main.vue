@@ -292,7 +292,7 @@
               totalValue = totalValue[vv]
             })
           } else {
-            totalValue = (response && response[totalField]) || result.length
+            totalValue = response || result.length
           }
 
           this.total = totalValue
