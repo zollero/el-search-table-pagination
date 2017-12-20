@@ -287,14 +287,19 @@
           }
 
           let totalValue = response
-          if (response[totalField] && totalField && totalField.indexOf('.') !== -1) {
-            totalField.split('.').forEach(vv => {
-              totalValue = totalValue[vv]
-            })
+          if (Object.prototype.toString.call(response) === '[object Array]') {
+            totalValue = response.length
+          } else if (typeof response === 'object') {
+            if (totalField && totalField.indexOf('.') !== -1) {
+              totalField.split('.').forEach(vv => {
+                totalValue = totalValue[vv]
+              })
+            } else {
+              totalValue = response[totalField]
+            }
           } else {
-            totalValue = response || result.length
+            totalValue = 0
           }
-
           this.total = totalValue
 
           this.loading = false
