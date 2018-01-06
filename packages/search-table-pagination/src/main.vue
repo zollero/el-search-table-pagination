@@ -93,7 +93,7 @@
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
           </span>
           <span v-else-if="column.slotName">
-            <slot :name="column.slotName" :row="scope.row" />
+            <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
           </span>
           <span v-else>
             {{ column.render ? column.render(scope.row) : scope.row[column.prop] }}
