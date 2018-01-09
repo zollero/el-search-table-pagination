@@ -190,7 +190,11 @@
         const validParamKeys = Object.keys(mergeParams).filter(v => {
           return mergeParams[v] !== undefined && mergeParams[v] !== ''
         })
-        const paramFuzzy = this.$refs['searchForm'].getParamFuzzy()
+        const searchForm = this.$refs['searchForm']
+        let paramFuzzy
+        if (searchForm) {
+          paramFuzzy = searchForm.getParamFuzzy()
+        }
 
         if (validParamKeys.length > 0) {
           const validData = cacheLocalData.filter(v => {
@@ -198,12 +202,12 @@
             validParamKeys.forEach(vv => {
               if (typeof v[vv] === 'number') {
                 valids.push(
-                  paramFuzzy[vv] ? (String(v[vv]).indexOf(String(mergeParams[vv])) !== -1)
+                  paramFuzzy && paramFuzzy[vv] ? (String(v[vv]).indexOf(String(mergeParams[vv])) !== -1)
                     : (String(v[vv]) === String(mergeParams[vv]))
                 )
               } else {
                 valids.push(
-                  paramFuzzy[vv] ? (v[vv].indexOf(mergeParams[vv]) !== -1) : (v[vv] === mergeParams[vv])
+                  paramFuzzy && paramFuzzy[vv] ? (v[vv].indexOf(mergeParams[vv]) !== -1) : (v[vv] === mergeParams[vv])
                 )
               }
             })
