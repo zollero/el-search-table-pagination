@@ -165,8 +165,10 @@
         this.pagination.pageIndex = pageIndex
         this.dataChangeHandler()
       },
-      searchHandler() {
-        this.pagination.pageIndex = 1
+      searchHandler(resetPageIndex = true) {
+        if (resetPageIndex) {
+          this.pagination.pageIndex = 1
+        }
         this.dataChangeHandler(arguments[0])
       },
       dataChangeHandler() {

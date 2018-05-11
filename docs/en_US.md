@@ -91,7 +91,7 @@ submitHandler | function to hander click event of submit button, the will receiv
 
 | Method Name | Description | Parameters |
 | ----- |-----|-----|
-| searchHandler | Reset page index to 1, and research | - |
+| searchHandler | Research, and default reset page index to 1, set false to prevent resetting page index | resetPageIndex: boolean |
 
 ## Slots
 
