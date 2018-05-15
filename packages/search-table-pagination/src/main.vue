@@ -318,15 +318,18 @@
         this.$emit(event, ...Array.from(arguments).slice(1))
       },
       loadLocalData(data) {
+        const { autoLoad } = this
         if (!data) {
           throw new Error(`When the type is 'local', you must set attribute 'data' and 'data' must be a array.`)
           this.showPagination = false
           return false
         }
         const cacheData = JSON.parse(JSON.stringify(data))
-        this.tableData = this.dataFilter(cacheData)
         this.cacheLocalData = cacheData
-        this.total = cacheData.length
+        if (autoLoad) {
+          this.tableData = this.dataFilter(cacheData)
+          this.total = cacheData.length
+        }
       }
     },
     mounted() {
