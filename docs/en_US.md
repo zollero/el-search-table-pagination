@@ -25,7 +25,7 @@
 
 PS: Also support more attributes, please refer to Element UI [Table attributes](https://github.com/ElemeFE/element/blob/dev/examples/docs/en-US/table.md#table-attributes)。
 
-Supported attributes of `Element UI Table`: stripe / border / height / max-height / fit / show-header / highlight-current-row / current-row-key / row-class-name / row-style / row-key / empty-text / default-expand-all / expand-row-keys / default-sort / tooltip-effect / show-summary / sum-text / summary-method.
+Supported attributes of `Element UI Table`: stripe / border / height / max-height / fit / show-header / highlight-current-row / current-row-key / row-class-name / row-style / row-key / empty-text / default-expand-all / expand-row-keys / default-sort / tooltip-effect / show-summary / sum-text / summary-method / size.
 
 ### Table column Attributes
 

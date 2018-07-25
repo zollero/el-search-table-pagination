@@ -25,6 +25,7 @@
       ref="table"
       :data="tableData"
       :border="border"
+      :size="size"
       :stripe="stripe"
       :height="height"
       :max-height="maxHeight"
