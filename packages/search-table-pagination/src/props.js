@@ -5,6 +5,7 @@ let props = {
   // Element UI Table attributes
   height: [String, Number],
   maxHeight: [String, Number],
+  size: String,
   stripe: Boolean,
   border: Boolean,
   fit: {
