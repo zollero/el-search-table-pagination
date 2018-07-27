@@ -22,6 +22,7 @@
 | pagination-layout | Layout of pagination, elements  separated with a comma | string | sizes, prev, pager, next, jumper, ->, total, slot | total, prev, pager, next, jumper, sizes |
 | page-index-key | The key of pagination parameter of page index | string | - | pageIndex |
 | page-size-key | The key of pagination parameter of page size | string | - | pageSize |
+| table-style | CSS Styles which will be passed to `el-table` | string | - | width:100%;margin-top:20px; |
 
 PS: Also support more attributes, please refer to Element UI [Table attributes](https://github.com/ElemeFE/element/blob/dev/examples/docs/en-US/table.md#table-attributes)。
 
