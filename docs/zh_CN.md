@@ -22,6 +22,7 @@
 | pagination-layout | 分页控件的结构，每个类型用逗号分隔 | string | sizes, prev, pager, next, jumper, ->, total, slot | total, prev, pager, next, jumper, sizes |
 | page-index-key | 参数：页码数 的 key 值 | string | - | pageIndex |
 | page-size-key | 参数：每页展示个数 的 key 值 | string | - | pageSize |
+| table-style | 传递给`el-table`的样式style | string | - | width:100%;margin-top:20px; |
 
 注：更多属性，请参考 Element UI [Table 组件的文档](https://github.com/ElemeFE/element/blob/dev/examples/docs/zh-CN/table.md#table-attributes)。
 

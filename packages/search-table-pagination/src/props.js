@@ -30,6 +30,10 @@ let props = {
   sumText: String,
   summaryMethod: Function,
   // custom attributes
+  tableStyle: {
+    type: String,
+    default: "width:100%;margin-top:20px;",
+  },
   fetch: {
     type: Function
   },
