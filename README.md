@@ -1,5 +1,15 @@
 # Element search table pagination
 
+![npm](https://img.shields.io/npm/v/el-search-table-pagination.svg)
+![npm bundle size (minified)](https://img.shields.io/bundlephobia/min/el-search-table-pagination.svg)
+![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/el-search-table-pagination.svg)
+![npm](https://img.shields.io/npm/dw/el-search-table-pagination.svg?style=popout)
+![npm](https://img.shields.io/npm/dm/el-search-table-pagination.svg?style=popout)
+![npm](https://img.shields.io/npm/l/el-search-table-pagination.svg)
+
+[![NPM](https://nodei.co/npm/el-search-table-pagination.png)](https://nodei.co/npm/el-search-table-pagination/)
+
+
 > Combines Form, Table and Pagination components of [Element UI](https://github.com/ElemeFE/element) together. Based on Vue 2.x.
 
 > You can use this package to show local and remote list data in table with search form and pagination.
