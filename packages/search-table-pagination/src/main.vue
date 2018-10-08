@@ -89,7 +89,8 @@
         :filter-multiple="column.filterMultiple"
         :filter-method="column.filterMethod"
         :filtered-value="column.filteredValue">
-        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
+        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false "
+          v-if="column.filter || column.slotName || column.render">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
           </span>
