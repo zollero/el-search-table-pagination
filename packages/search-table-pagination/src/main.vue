@@ -89,16 +89,21 @@
         :filter-multiple="column.filterMultiple"
         :filter-method="column.filterMethod"
         :filtered-value="column.filteredValue">
-        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false "
-          v-if="column.filter || column.slotName || column.render">
+        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false ">
           <span v-if="column.filter">
             {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
           </span>
           <span v-else-if="column.slotName">
             <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
           </span>
+          <span v-else-if="column.render">
+            {{ column.render(scope.row) }}
+          </span>
+          <span v-else-if="column.formatter">
+            {{ column.formatter(scope.row, scope.column, scope.row[column.prop], scope.$index) }}
+          </span>
           <span v-else>
-            {{ column.render ? column.render(scope.row) : scope.row[column.prop] }}
+            {{ scope.row[column.prop] }}
           </span>
         </template>
       </el-table-column>

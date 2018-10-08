@@ -44,6 +44,8 @@ PS: Also support more attributes, please refer to Element UI  [Table column Attr
 
 Supported attributes of `Element UI Table column`: column-key / fixed / render-header / sortable / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value.
 
+PS: Attribute `formatter` won't work if `renderer` or `filter` has been defined.
+
 ### Form Option Attributes
 
 | Attribute | Description | Type | Accepted Values | Default |
