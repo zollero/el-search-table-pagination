@@ -74,6 +74,7 @@
         :fixed="column.fixed"
         :render-header="column.renderHeader"
         :sortable="column.sortable"
+        :sort-by="column.sortBy"
         :sort-method="column.method"
         :resizable="column.resizable"
         :formatter="column.formatter"
