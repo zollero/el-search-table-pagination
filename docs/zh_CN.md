@@ -42,7 +42,7 @@
 
 注：更多属性，请参考 Element UI [Table column 的文档](https://github.com/ElemeFE/element/blob/dev/examples/docs/zh-CN/table.md#table-column-attributes)。
 
-支持的`Element UI Table column`属性有：column-key / fixed / render-header / sortable / sort-by / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value 。
+支持的`Element UI Table column`属性有：column-key / fixed / render-header / sortable / sort-by / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value / type 。
 
 注：关于`formatter`属性，如果定义了`renderer`或者`filter`的时候，`formatter`不起作用。
 

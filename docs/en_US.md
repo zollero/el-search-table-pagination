@@ -42,7 +42,7 @@ Supported attributes of `Element UI Table`: stripe / border / height / max-heigh
 
 PS: Also support more attributes, please refer to Element UI  [Table column Attribute](https://github.com/ElemeFE/element/blob/dev/examples/docs/en-US/table.md#table-column-attributes)。
 
-Supported attributes of `Element UI Table column`: column-key / fixed / render-header / sortable / sort-by / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value.
+Supported attributes of `Element UI Table column`: column-key / fixed / render-header / sortable / sort-by / sort-method / resizable / formatter / show-overflow-tooltip / align / header-align / class-name / label-class-name / selectable / reserve-selection / filters / filter-placement / filter-multiple / filter-method / filtered-value / type.
 
 PS: Attribute `formatter` won't work if `renderer` or `filter` has been defined.
 

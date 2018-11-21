@@ -76,6 +76,7 @@
         :sortable="column.sortable"
         :sort-by="column.sortBy"
         :sort-method="column.method"
+        :type="column.type"
         :resizable="column.resizable"
         :formatter="column.formatter"
         :show-overflow-tooltip="column.showOverflowTooltip"
