@@ -39,6 +39,7 @@
 | filter | 过滤器名（只有配置在全局的filter才有效） | string | - | - |
 | render | 处理数据的函数，接收行数据作为参数 | function | - | - |
 | slotName | 使用 slot 标记的代码块的 slot 属性值 | string | - | - |
+| type | `0.4.28`后支持，Element UI Table支持的一个属性，借用这个属性来切换是否使用本组件column内的插槽内容，当本属性没有给值时，本组件保持和之前版本一样的兼容性，组件会接管column数组中的定义并定义Element UI Table Column，只有指定的属性才会给予，并且会实现组件中给予的`render`和`formatter`等功能。如果该属性一旦有给值时，`column`定义的所有属性都会传递给Element UI Table Column，本组件也不会对column内容进行处理，相应的处理能力也交给Element UI Table本身，通过这种方式，也可以支持Element UI Table中的多选列，Index列等，设置为`default`也即为Element UI Table的缺省模式，会从数据对象中读取`prop`属性，也会受到`filter`的过滤，只不过处理都是Element UI Table来进行了。 | string | default/selection/index/expand |  |
 
 注：更多属性，请参考 Element UI [Table column 的文档](https://github.com/ElemeFE/element/blob/dev/examples/docs/zh-CN/table.md#table-column-attributes)。
 
