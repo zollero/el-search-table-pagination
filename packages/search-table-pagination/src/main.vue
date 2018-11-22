@@ -64,51 +64,53 @@
 
       <slot name="prepend" />
 
-      <el-table-column
-        v-for="(column, columnIndex) in columns" :key="columnIndex"
-        :column-key="column.columnKey"
-        :prop="column.prop"
-        :label="column.label"
-        :width="column.minWidth ? '-' : (column.width || 140)"
-        :minWidth="column.minWidth || column.width || 140"
-        :fixed="column.fixed"
-        :render-header="column.renderHeader"
-        :sortable="column.sortable"
-        :sort-by="column.sortBy"
-        :sort-method="column.method"
-        :type="column.type"
-        :resizable="column.resizable"
-        :formatter="column.formatter"
-        :show-overflow-tooltip="column.showOverflowTooltip"
-        :align="column.align"
-        :header-align="column.headerAlign || column.align"
-        :class-name="column.className"
-        :label-class-name="column.labelClassName"
-        :selectable="column.selectable"
-        :reserve-selection="column.reserveSelection"
-        :filters="column.filters"
-        :filter-placement="column.filterPlacement"
-        :filter-multiple="column.filterMultiple"
-        :filter-method="column.filterMethod"
-        :filtered-value="column.filteredValue">
-        <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false" v-if="!column.type">
-          <span v-if="column.filter">
-            {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
-          </span>
-          <span v-else-if="column.slotName">
-            <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
-          </span>
-          <span v-else-if="column.render">
-            {{ column.render(scope.row) }}
-          </span>
-          <span v-else-if="column.formatter">
-            {{ column.formatter(scope.row, scope.column, scope.row[column.prop], scope.$index) }}
-          </span>
-          <span v-else>
-            {{ scope.row[column.prop] }}
-          </span>
-        </template>
-      </el-table-column>
+      <template v-for="(column, columnIndex) in columns" :key="columnIndex">
+        <el-table-column
+          :column-key="column.columnKey"
+          :prop="column.prop"
+          :label="column.label"
+          :width="column.minWidth ? '-' : (column.width || 140)"
+          :minWidth="column.minWidth || column.width || 140"
+          :fixed="column.fixed"
+          :render-header="column.renderHeader"
+          :sortable="column.sortable"
+          :sort-by="column.sortBy"
+          :sort-method="column.method"
+          :resizable="column.resizable"
+          :formatter="column.formatter"
+          :show-overflow-tooltip="column.showOverflowTooltip"
+          :align="column.align"
+          :header-align="column.headerAlign || column.align"
+          :class-name="column.className"
+          :label-class-name="column.labelClassName"
+          :selectable="column.selectable"
+          :reserve-selection="column.reserveSelection"
+          :filters="column.filters"
+          :filter-placement="column.filterPlacement"
+          :filter-multiple="column.filterMultiple"
+          :filter-method="column.filterMethod"
+          :filtered-value="column.filteredValue"
+          v-if="column.type === undefined">
+          <template slot-scope="scope" :scope="newSlotScope ? 'scope' : false">
+            <span v-if="column.filter">
+              {{ Vue.filter(column['filter'])(scope.row[column.prop]) }}
+            </span>
+            <span v-else-if="column.slotName">
+              <slot :name="column.slotName" :row="scope.row" :$index="scope.$index" />
+            </span>
+            <span v-else-if="column.render">
+              {{ column.render(scope.row) }}
+            </span>
+            <span v-else-if="column.formatter">
+              {{ column.formatter(scope.row, scope.column, scope.row[column.prop], scope.$index) }}
+            </span>
+            <span v-else>
+              {{ scope.row[column.prop] }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column v-bind="column" v-else></el-table-column>
+      </template>
 
       <slot name="append" />
 
