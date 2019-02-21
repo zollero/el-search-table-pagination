@@ -95,7 +95,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 
 | 方法名 | 说明 | 参数 |
 | ----- |-----|-----|
-| searchHandler | 重新搜索数据，参数表示是否重置分页为1，默认为true | resetPageIndex |
+| searchHandler | 重新搜索数据，参数表示是否重置分页为1，默认为true。使用方法`this.$refs['el-search-table'].searchHandler(false)`（例中`el-search-table-handler`的`ref`属性为`el-search-table`） | resetPageIndex |
 
 ## Slots
 
