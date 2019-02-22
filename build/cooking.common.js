@@ -21,7 +21,7 @@ cooking.add('loader.scss', {
 });
 cooking.add('vue.preserveWhitespace', false);
 cooking.add('plugin.banner', new webpack.BannerPlugin({
-  banner: 'el-search-table-pagination\nCopyright(c) 2017 zollero\nMIT Licensed',
+  banner: `el-search-table-pagination\nCopyright(c) 2017 - ${new Date().getFullYear()} zollero\nMIT Licensed`,
   entryOnly: true
 }));
 

@@ -62,6 +62,7 @@ submitHandler | function to hander click event of submit button, the will receiv
 | submitLoading | detemine whether the button is loading | boolean | - | - |
 | submitBtnText | text of submit button | string | - | 查询 |
 | resetBtnText | text of reset button | string | - | 重置 |
+| resetBtnCallback | callback function in reset button's click event handler, will be called after resetting the search params | function | - | - |
 
 ### Form Item Attributes
 

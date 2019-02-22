@@ -32,6 +32,7 @@ export const formProps = {
     type: String,
     default: '重置'
   },
+  resetBtnCallback: Function,
   forms: {
     type: Array,
     required: true

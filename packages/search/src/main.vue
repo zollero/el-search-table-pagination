@@ -180,6 +180,8 @@
       },
       resetForm() {
         this.$refs['form'].resetFields()
+        const { resetBtnCallback } = this
+        if (resetBtnCallback) resetBtnCallback()
       },
       changeDate(date, startDate, endDate) {
         let dates

@@ -62,6 +62,7 @@ submitHandler | 查询按钮的click处理函数，接收form表单对象数据�
 | submitLoading | 查询按钮的加载中状态 | boolean | - | - |
 | submitBtnText | 查询按钮的文本 | string | - | 查询 |
 | resetBtnText | 重置按钮的文本 | string | - | 重置 |
+| resetBtnCallback | 重置按钮点击事件的回调函数，在重置了搜索条件之后执行 | function | - | - |
 
 ### Form Item 属性
 

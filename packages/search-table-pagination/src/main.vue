@@ -15,7 +15,8 @@
       :submit-loading="loading"
       :showResetBtn="formOptions.showResetBtn"
       :submitBtnText="formOptions.submitBtnText"
-      :resetBtnText="formOptions.resetBtnText" />
+      :resetBtnText="formOptions.resetBtnText"
+      :resetBtnCallback="formOptions.resetBtnCallback" />
 
     <slot name="form" :loading="loading" :search="searchHandler" />
 
@@ -64,8 +65,9 @@
 
       <slot name="prepend" />
 
-      <template v-for="(column, columnIndex) in columns" :key="columnIndex">
+      <template v-for="(column, columnIndex) in columns">
         <el-table-column
+          :key="columnIndex"
           :column-key="column.columnKey"
           :prop="column.prop"
           :label="column.label"
@@ -109,7 +111,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column v-bind="column" v-else></el-table-column>
+        <el-table-column v-bind="column" :key="columnIndex" v-else></el-table-column>
       </template>
 
       <slot name="append" />
