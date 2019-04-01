@@ -221,8 +221,8 @@
             console.warn(`The result of key:${resultField} is not Array. 接口返回的字段:${resultField} 不是一个数组`)
           }
 
-          if (this.resultHandler) {
-            this.selectOptions[dataKey] = result.map(this.resultHandler)
+          if (resultHandler) {
+            this.selectOptions[dataKey] = result.map(resultHandler)
           } else {
             this.selectOptions[dataKey] = result
           }
