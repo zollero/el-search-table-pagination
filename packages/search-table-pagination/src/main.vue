@@ -150,7 +150,7 @@
         Vue,
         pagination: {
           pageIndex: this.initPageIndex || 1,
-          pageSize: initPageSize || (() => {
+          pageSize: this.initPageSize || (() => {
             const { pageSizes } = _this
             if (pageSizes.length > 0) {
               return pageSizes[0]
