@@ -149,7 +149,7 @@
       return {
         Vue,
         pagination: {
-          pageIndex: this.initPageIndex || 1,
+          pageIndex: 1,
           pageSize: this.initPageSize || (() => {
             const { pageSizes } = _this
             if (pageSizes.length > 0) {
@@ -346,6 +346,7 @@
       }
     },
     mounted() {
+      this.pagination.pageIndex = this.initPageIndex || 1
       // event: expand changed to `expand-change` in Element v2.x
       this.$refs['table'].$on('expand', (row, expanded) => this.emitEventHandler('expand', row, expanded))
       const { type, autoLoad, data, formOptions, params } = this
