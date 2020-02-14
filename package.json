@@ -1,6 +1,6 @@
 {
   "name": "el-search-table-pagination",
-  "version": "0.4.30",
+  "version": "0.4.31",
   "description": "A component which combines form、table with pagination components in Element UI. ",
   "main": "./lib/index.js",
   "files": [
@@ -35,7 +35,7 @@
     "vue": "^2.5.2"
   },
   "dependencies": {
-    "axios": "^0.16.2"
+    "axios": "^0.19.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
