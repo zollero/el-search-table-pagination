@@ -40,6 +40,8 @@ Supported attributes of `Element UI Table`: stripe / border / height / max-heigh
 | render | function to handle data, and show the return value. The function will have the element of list data as parameter | function | - | - |
 | slotName | use slot to wrap a code block to build column content | string | - | - |
 | type | Supported after version`0.4.28`. This is a supported property on Element UI Table. We try to use this property to distinguish adding slot content to column or not, so that we can support new features but keep the compabilities. Without setting this property, we will keep same behavior as the previous version, which will take certain column definitions and pass to Element UI Table Column object, and we will handle some custom functions such as `render`, `formatter`, etc. But when this property has been set with a value, we will simply pass anything from column defintion to Element UI Table Column. In this way, we can also support multi selection feature, index col feature, etc. Setting `type` to `default` will also let Element UI Table Column take over the rendering which will simply take `prop` from data object with `filter` setting considered. | string | default/selection/index/expand |  |
+| page-size | Size of each page, `sync` decoration is supported | Number |  | |
+| current-page | Current page index, start from 1, same logic as the original `el-pagination` componenet, `sync` decoration is supported |  |  | |
 
 PS: Also support more attributes, please refer to Element UI  [Table column Attribute](https://github.com/ElemeFE/element/blob/dev/examples/docs/en-US/table.md#table-column-attributes)。
 
