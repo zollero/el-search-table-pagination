@@ -174,13 +174,13 @@ let props = {
     type: String,
     default: 'pageSize'
   },
-  initPageSize: {
+  pageSize: {
     type: [Number, null],
-    default: null,
+    default: null
   },
-  initPageIndex: {
+  currentPage: {
     type: [Number, null],
-    default: null,
+    default: null
   }
 }
 

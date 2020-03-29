@@ -1,4 +1,3 @@
-
 <template>
   <div>
 
@@ -149,8 +148,8 @@
       return {
         Vue,
         pagination: {
-          pageIndex: this.initPageIndex || 1,
-          pageSize: this.initPageSize || (() => {
+          pageIndex: this.currentPage || 1,
+          pageSize: this.pageSize || (() => {
             const { pageSizes } = _this
             if (pageSizes.length > 0) {
               return pageSizes[0]
@@ -172,10 +171,12 @@
     methods: {
       handleSizeChange(size) {
         this.pagination.pageSize = size
+        this.$emit('update:pageSize', size)
         this.dataChangeHandler()
       },
       handleCurrentChange(pageIndex) {
         this.pagination.pageIndex = pageIndex
+        this.$emit('update:currentPage', pageIndex)
         this.dataChangeHandler()
       },
       searchHandler(resetPageIndex = true) {
@@ -366,7 +367,21 @@
     watch: {
       data: function(value) {
         this.loadLocalData(value)
-      }
-    }
+      },
+
+      currentPage: function(val) {
+        if (val) {
+          this.pagination.pageIndex = val
+          this.dataChangeHandler()
+        }
+      },
+
+      pageSize: function(val) {
+        if (val) {
+          this.pagination.pageSize = val
+          this.dataChangeHandler()
+        }
+      },
+    },
   }
 </script>
