@@ -372,14 +372,12 @@
       currentPage: function(val) {
         if (val) {
           this.pagination.pageIndex = val
-          this.dataChangeHandler()
         }
       },
 
       pageSize: function(val) {
         if (val) {
           this.pagination.pageSize = val
-          this.dataChangeHandler()
         }
       },
     },
