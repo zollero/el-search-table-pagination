@@ -1,6 +1,6 @@
 {
   "name": "el-search-table-pagination",
-  "version": "0.4.31",
+  "version": "0.4.32",
   "description": "A component which combines form、table with pagination components in Element UI. ",
   "main": "./lib/index.js",
   "files": [
@@ -12,10 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cooking build -c build/cooking.conf.js,build/cooking.common.js,build/cooking.component.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zollero/el-search-table-pagination.git"
-  },
+  "repository": "git:github.com/zollero/el-search-table-pagination.git",
   "keywords": [
     "Element UI",
     "UI",
