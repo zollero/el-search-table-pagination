@@ -30,6 +30,9 @@
     "url": "https://github.com/zollero/el-search-table-pagination/issues"
   },
   "homepage": "https://github.com/zollero/el-search-table-pagination#readme",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  },
   "peerDependencies": {
     "element-ui": "^2.0.7",
     "vue": "^2.5.2"
