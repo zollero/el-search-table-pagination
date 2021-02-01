@@ -181,7 +181,8 @@ let props = {
   currentPage: {
     type: [Number, null],
     default: null
-  }
+  },
+  cellClassName: [String, Function]
 }
 
 // Object.keys(formProps).forEach(v => {

@@ -34,6 +34,7 @@
       :highlight-current-row="highlightCurrentRow"
       :current-row-key="currentRowKey"
       :row-class-name="rowClassName"
+      :cell-class-name="cellClassName"
       :row-style="rowStyle"
       :row-ket="rowKey"
       :empty-text="emptyText"
