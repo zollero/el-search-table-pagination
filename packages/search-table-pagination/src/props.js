@@ -173,7 +173,16 @@ let props = {
   pageSizeKey: {
     type: String,
     default: 'pageSize'
-  }
+  },
+  pageSize: {
+    type: [Number, null],
+    default: null
+  },
+  currentPage: {
+    type: [Number, null],
+    default: null
+  },
+  cellClassName: [String, Function]
 }
 
 // Object.keys(formProps).forEach(v => {

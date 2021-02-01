@@ -23,6 +23,8 @@
 | page-index-key | 参数：页码数 的 key 值 | string | - | pageIndex |
 | page-size-key | 参数：每页展示个数 的 key 值 | string | - | pageSize |
 | table-style | 传递给`el-table`的样式style | string | - | width:100%;margin-top:20px; |
+| page-size | 每页条数，支持`sync`修饰符 | Number |  |  |
+| current-page | 当前页码，逻辑同`el-pagination`组件，支持`sync`修饰符 | Number |  |  |
 
 注：更多属性，请参考 Element UI [Table 组件的文档](https://github.com/ElemeFE/element/blob/dev/examples/docs/zh-CN/table.md#table-attributes)。
 
