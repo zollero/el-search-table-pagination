@@ -36,7 +36,7 @@
       :current-row-key="currentRowKey"
       :row-class-name="rowClassName"
       :row-style="rowStyle"
-      :row-ket="rowKey"
+      :row-key="rowKey"
       :empty-text="emptyText"
       :default-expand-all="defaultExpandAll"
       :expand-row-keys="expandRowKeys"
