@@ -20,6 +20,7 @@
         :disabled="form.disabled"
         :placeholder="form.placeholder"
         :clearable="form.clearable"
+        :multiple="form.multiple"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" >
         <el-option v-for="(option, optionIndex) in form.options" :key="optionIndex + '_local'"
           :value="(typeof option === 'object') ? option[form.valueKey || 'value'] : option"
