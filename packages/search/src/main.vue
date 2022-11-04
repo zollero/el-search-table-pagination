@@ -11,6 +11,7 @@
         :size="form.size ? form.size : size"
         :readonly="form.readonly"
         :disabled="form.disabled"
+        :clearable="form.clearable"
         :placeholder="form.placeholder"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" />
       <el-select v-else-if="form.itemType === 'select'"
@@ -18,6 +19,8 @@
         :size="form.size ? form.size : size"
         :disabled="form.disabled"
         :placeholder="form.placeholder"
+        :clearable="form.clearable"
+        :multiple="form.multiple"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')" >
         <el-option v-for="(option, optionIndex) in form.options" :key="optionIndex + '_local'"
           :value="(typeof option === 'object') ? option[form.valueKey || 'value'] : option"
@@ -32,6 +35,7 @@
         :size="form.size ? form.size : size"
         :disabled="form.disabled"
         :readonly="form.readonly"
+        :clearable="form.clearable"
         :editable="form.editable"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')"
         :picker-options="form.pickerOptions || {}" />
@@ -42,6 +46,7 @@
         :disabled="form.disabled"
         :readonly="form.readonly"
         :editable="form.editable"
+        :clearable="form.clearable"
         :placeholder="form.placeholder"
         :style="itemStyle + (form.itemWidth ? `width: ${form.itemWidth}px;` : '')"
         :picker-options="form.pickerOptions || {}" />
