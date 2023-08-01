@@ -22,6 +22,7 @@ let props = {
   rowStyle: [String, Function],
   rowKey: [String, Function],
   emptyText: String,
+  indent: { type: Number, default: 16 },
   defaultExpandAll: Boolean,
   expandRowKeys: Array,
   defaultSort: Object,

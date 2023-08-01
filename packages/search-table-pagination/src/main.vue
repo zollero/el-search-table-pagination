@@ -25,6 +25,7 @@
       ref="table"
       :data="tableData"
       :border="border"
+      :indent="indent"
       :size="size"
       :stripe="stripe"
       :height="height"
